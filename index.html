@@ -259,7 +259,7 @@ function setView(v){
   view=v;document.querySelectorAll('.vtab').forEach(t=>t.classList.toggle('active',t.dataset.v===v));
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id===v+'View'));
   updateHints();
-  if(v==='graph'){initGraph();renderGraph()}
+  if(v==='graph'){initGraph();gResize();}
   else render();
 }
 
