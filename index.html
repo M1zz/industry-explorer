@@ -417,7 +417,7 @@ function gNodeAt(sx,sy){const w=s2w(sx,sy);let cl=null,cd=Infinity;for(let i=gN.
 cv.addEventListener('mousedown',e=>{gDrag=true;gDS={x:e.clientX,y:e.clientY};gCS={x:cam.x,y:cam.y}});
 cv.addEventListener('mousemove',e=>{
   if(gDrag){cam.x=gCS.x-(e.clientX-gDS.x)/cam.z;cam.y=gCS.y-(e.clientY-gDS.y)/cam.z}
-  const nd=gNodeAt(e.clientX,e.clientY);gHov=nd;cv.style.cursor=nd?'pointer':(gDrag?'grabbing':'grab');
+  const nd=gNodeAt(e.offsetX,e.offsetY);gHov=nd;cv.style.cursor=nd?'pointer':(gDrag?'grabbing':'grab');
   const tt=document.getElementById('tt');
   if(nd&&!gDrag){tt.classList.add('show');tt.style.left=(e.clientX+12)+'px';tt.style.top=(e.clientY-6)+'px';
     document.getElementById('ttn').textContent=(nd.icon||'')+(nd.type==='problem'?'🔴 ':nd.type==='solution'?'🟢 ':' ')+nd.title;
@@ -427,7 +427,7 @@ cv.addEventListener('mousemove',e=>{
   }else tt.classList.remove('show');
 });
 cv.addEventListener('mouseup',e=>{const mv=Math.abs(e.clientX-gDS.x)+Math.abs(e.clientY-gDS.y);
-  if(mv<5){const nd=gNodeAt(e.clientX,e.clientY);if(nd){gActive=gFamily(nd.id);showGI(nd)}else{gActive=null;closeGI()}}
+  if(mv<5){const nd=gNodeAt(e.offsetX,e.offsetY);if(nd){gActive=gFamily(nd.id);showGI(nd)}else{gActive=null;closeGI()}}
   gDrag=false});
 cv.addEventListener('wheel',e=>{e.preventDefault();cam.z=Math.max(0.1,Math.min(3,cam.z*(e.deltaY>0?0.9:1.1)))},{passive:false});
 cv.addEventListener('touchstart',e=>{e.preventDefault();const t=e.touches[0];gDrag=true;gDS={x:t.clientX,y:t.clientY};gCS={x:cam.x,y:cam.y}},{passive:false});
