@@ -126,6 +126,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 /* THEME TOGGLE */
 .theme-toggle{position:fixed;bottom:1.5rem;right:1.5rem;z-index:500;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border);cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,0.15);padding:0;line-height:1}
 .theme-toggle:hover{border-color:var(--accent);transform:scale(1.1)}
+/* DATASET TOGGLE */
+.ds-tabs{display:flex;gap:8px;margin-top:10px}
+.ds-tab{padding:7px 15px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface2);color:var(--dim);font-size:12.5px;font-weight:700;cursor:pointer;transition:all .18s;font-family:'Noto Sans KR',sans-serif}
+.ds-tab:hover{border-color:var(--accent);color:var(--text)}
+.ds-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
 </style>
 </head>
 <body>
@@ -133,7 +138,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 <button class="theme-toggle" id="themeToggle" title="다크 모드로 전환">🌙</button>
 <div class="top">
   <h1>PROBLEM ↔ SOLUTION EXPLORER</h1>
-  <div class="top-sub">문제가 솔루션을 만든다 — 세 가지 뷰로 탐색하세요</div>
+  <div class="top-sub" id="topSub">문제가 솔루션을 만든다 — 세 가지 뷰로 탐색하세요</div>
+  <div class="ds-tabs">
+    <button class="ds-tab active" data-ds="industry" onclick="setDataset('industry')">🏭 산업 지도</button>
+    <button class="ds-tab" data-ds="micro" onclick="setDataset('micro')">🔎 미세 불편</button>
+  </div>
 </div>
 
 <div class="vtabs">
@@ -183,7 +192,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 <script>
 // ══════════ DATA ══════════
-const D=[
+const D_INDUSTRY=[
 {id:"ai",icon:"🤖",title:"AI · 소프트웨어",color:"#7c5cfc",subs:[
 {title:"생성형 AI",ep:[{n:"ChatGPT",p:["정보 탐색에 시간이 너무 걸린다","글쓰기/요약이 어렵다","전문 지식 접근이 힘들다"]},{n:"Midjourney",p:["디자인 비용이 비싸다","시각적 아이디어 표현이 어렵다"]},{n:"Copilot",p:["코딩 생산성이 낮다","반복 코드가 지루하다"]}]},
 {title:"클라우드/SaaS",ep:[{n:"Google Workspace",p:["팀 협업이 비효율적이다","문서 버전 관리 안 됨"]},{n:"Notion",p:["정보가 흩어져 있다","지식 관리 안 됨"]},{n:"Slack",p:["팀 소통이 느리다","이메일이 너무 많다"]}]},
@@ -247,15 +256,70 @@ const D=[
 ]}
 ];
 
+// ══════════ MICRO-FRICTION DATA (솔루션은 있지만 여전히 손이 가는 아주 작은 불편 · 실제 리뷰/포럼 근거 기반) ══════════
+const D_MICRO=[
+{id:"edu-micro",icon:"🎓",title:"교육·학습",color:"#5ac8fa",subs:[
+{title:"필기·노트앱",ep:[{n:"굿노트(Goodnotes)",p:["PDF로 내보내면 손글씨가 사라져 페이지마다 스크린샷으로 다시 공유","페이지가 쌓이거나 오래 켜두면 펜이 버벅여 앱을 껐다 켬","손글씨 검색은 인덱싱이 끝날 때까지 기다리거나 언어를 바꿨다 되돌려 재인덱싱"]}]},
+{title:"강의 기록·복습",ep:[{n:"클로바노트",p:["편집하면 음성을 못 듣고 들으면 편집이 안 돼 재생·정지를 수십 번 반복","편집을 누르면 커서가 듣던 지점이 아닌 엉뚱한 위쪽 문단으로 튐"]},{n:"인강 플레이어(Coursera/edX)",p:["기관이 스킵을 막아두면 놓친 10초를 되감으려 처음부터 재생"]}]},
+{title:"암기·레퍼런스",ep:[{n:"Anki·Quizlet",p:["노트·슬라이드를 카드로 옮기려면 질문-답 쌍을 45분씩 복붙","이미지 오클루전은 마스크가 늘수록 느려져 외부 애드온으로 갈아탐"]},{n:"Zotero",p:["참고문헌을 복붙하면 이탤릭·들여쓰기가 딸려와 항목마다 손으로 정리"]}]},
+{title:"협업·시간표·자료뷰",ep:[{n:"에브리타임",p:["학교 데이터가 없으면 강의명·시간·강의실을 손으로 하나씩 등록","구글 캘린더 연동이 없어 강의를 캘린더에 재입력"]},{n:"Google Docs 팀플",p:["각자 붙여넣은 글의 폰트·색이 제각각이라 제출 직전 서식을 통일"]},{n:"PDF 리더 다크모드",p:["UI만 어두워지고 PDF 배경은 흰색이라 파일마다 색 반전·대비를 조정"]}]}
+]},
+{id:"office-micro",icon:"💼",title:"직장·사무",color:"#af52de",subs:[
+{title:"경비·문서 정산",ep:[{n:"영수증 스캔+경비 엑셀",p:["찍어도 날짜·상호·금액을 엑셀에 한 줄씩 옮겨 적음","엑셀 정산과 그룹웨어 결재에 같은 내용을 두 번 입력"]},{n:"계약서 PDF 서명",p:["전자서명을 안 쓰면 출력→서명→스캔→재전송을 반복"]}]},
+{title:"명함·회의",ep:[{n:"리멤버·캠카드",p:["규격 외 명함은 주소·직장이 뒤바뀌어 등록 시 직접 고침","여러 장 찍으면 '수기 입력 중'이라 결과를 기다림"]},{n:"AI 회의록(클로바노트·티로)",p:["겹쳐 말하면 화자 라벨을 수동으로 바로잡음","빠진 액션아이템·오기록을 편집"]},{n:"캘린더·Calendly",p:["예약 링크를 안 쓰는 상대와는 시간대 환산 메일을 반복"]}]},
+{title:"오피스 서식 지옥",ep:[{n:"엑셀→워드/아웃룩 붙여넣기",p:["열 너비·정렬·테두리가 깨져 매번 붙여넣기 옵션을 고르거나 다시 정렬"]},{n:"PowerPoint 붙여넣기",p:["외부 자료를 붙이면 폰트·색이 테마에 맞춰 변형돼 다시 잡음"]},{n:"엑셀 '텍스트로 저장된 숫자'",p:["초록 삼각형을 셀마다 눌러 숫자로 변환"]}]},
+{title:"커뮤니케이션·파일",ep:[{n:"이메일 첨부",p:["파일을 빠뜨리고 전송해 '다시 보냅니다' 사과 메일을 재전송"]},{n:"파일 버전 관리",p:["'최종_진짜최종_v2'를 손으로 붙이고 최신본을 하나씩 열어 확인"]},{n:"슬랙·팀즈 요청",p:["채팅으로 온 부탁을 할 일로 옮겨 적지 않으면 묻혀서 잊음"]},{n:"스크린샷 공유",p:["민감정보를 눈으로 찾아 매번 검은 박스를 손으로 그림"]}]}
+]},
+{id:"cook-micro",icon:"🍳",title:"요리·주방",color:"#34c759",subs:[
+{title:"레시피 보며 조리",ep:[{n:"요리 영상(틱톡/릴/유튜브)",p:["계량 확인하려고 젖은 손으로 방금 장면을 되감음","저장한 릴 캡션에 레시피가 없어 영상을 돌려보며 받아씀"]},{n:"폰 레시피 화면",p:["자동 잠금으로 화면이 꺼져 기름 묻은 손으로 두드림","반죽·생닭 만진 손으로 다음 단계 넘기려 손을 씻음"]},{n:"레시피 블로그",p:["작성자 사연을 지나 재료·본문까지 광고 사이로 스크롤"]}]},
+{title:"장보기·재고",ep:[{n:"냉장고 관리 앱",p:["바코드 없는 신선식품은 수기 입력, 확인이 귀찮아 안 열게 됨"]},{n:"쇼핑리스트 병합",p:["단위·명칭이 다르면(대파/파, tbsp/ml) 자동 병합이 안 돼 수동으로 합침"]}]},
+{title:"계량·환산",ep:[{n:"인분(serving) 스케일러",p:["계란 1개를 반으로 줄이면 0.5개로만 떠서 풀어서 무게로 다시 잼"]},{n:"컵↔그램 환산·대체재",p:["재료마다 밀도가 달라 한 번에 안 변환돼 재료별로 검색","없는 재료의 대체법을 레시피 밖에서 따로 검색·실행"]}]},
+{title:"조리 관리",ep:[{n:"멀티 타이머",p:["기본 타이머는 하나뿐이라 밥·국·구이를 매번 지우고 새로 설정","어느 알람이 어느 냄비인지 라벨을 손으로 붙임"]},{n:"밀프렙 라벨",p:["통마다 날짜·내용물을 손으로 적고, 젖은 통엔 펜이 안 써짐"]}]}
+]},
+{id:"parenting-micro",icon:"🍼",title:"육아",color:"#ff8fab",subs:[
+{title:"수유·수면 기록",ep:[{n:"수유/수면 타이머",p:["정지 버튼을 깜빡하면 '47분'으로 남아 시각을 수동 보정","밤잠은 타이머를 못 켜 잠든·깬 시각을 아침에 수기 입력"]},{n:"기록 앱 UI",p:["한 손으로 아기 안고 작은 버튼을 누르기 어려움","시각을 스크롤 휠로 맞추는 데 오래 걸림"]},{n:"유축 기록 앱",p:["방금 좌/우 어느 쪽이었는지 깜빡해 매번 지정"]}]},
+{title:"건강·투약",ep:[{n:"해열제 교차 복용",p:["마지막 준 시각·용량을 손으로 적어 이중투약 방지"]},{n:"성장곡선 앱",p:["병원에서 잰 몸무게·키를 매번 손으로 옮겨 적음"]},{n:"이유식 알레르기 로그",p:["새 재료 반응을 48~72시간 뒤까지 수기로 추적"]}]},
+{title:"공유·기관 소통",ep:[{n:"부부 공동 기록",p:["계정·기기가 안 맞아 같은 수유를 두 번 기록"]},{n:"가족 사진앱(Tinybeans)",p:["조부모가 찍은 사진을 부모가 대신 업로드"]},{n:"키즈노트 알림장",p:["매일 댓글에 뭐라 쓸지 막막해 반복 작성","준비물 공지는 확인만, 챙기는 건 따로 메모"]}]}
+]},
+{id:"fitness-micro",icon:"💪",title:"운동·헬스",color:"#5856d6",subs:[
+{title:"웨이트 기록",ep:[{n:"Strong·Hevy·번핏",p:["세트마다 무게·횟수를 타이핑해 쉬는 시간 절반이 날아감","세트 완료 체크에 select all이 없어 하나씩 탭","슈퍼세트는 두 종목 사이를 매 세트 스크롤"]},{n:"RepCount 통계",p:["주간 부위별 볼륨을 그래프 보며 손으로 합산"]}]},
+{title:"식단 기록",ep:[{n:"MyFitnessPal",p:["집밥 재료를 매번 하나씩 검색·등록(12개면 10~20분)","바코드 스캔값을 실물 라벨과 눈으로 대조","저울 g을 서빙 수로 나눗셈해 입력","매일 같은 식사를 날짜만 바꿔 다시 등록"]}]},
+{title:"유산소·측정",ep:[{n:"Garmin/Strava 오토포즈",p:["신호등에서 멈춘 뒤 재개가 안 돼 거리 누락","종료를 깜빡하면 귀갓길이 섞여 수동 편집"]},{n:"InBody 앱",p:["기계가 클라우드 연동 안 되면 수치를 손으로 옮겨 적음"]},{n:"물 섭취 트래커",p:["원탭 위젯이 없어 앱 열고 + 버튼을 여러 번 탭"]}]}
+]},
+{id:"travel-micro",icon:"✈️",title:"여행",color:"#0abde3",subs:[
+{title:"동선·일정 계획",ep:[{n:"구글맵 저장 리스트",p:["정렬·폴더가 없어 방문 순서를 하나씩 드래그","리스트에서 바로 경로를 못 걸어 다음 목적지로 안 이어짐","영업일·휴무를 장소마다 눌러 확인"]},{n:"엑셀 여행 일정표",p:["모바일 접근성이 나쁘고 현지 실시간 수정이 안 돼 노션으로 옮김"]}]},
+{title:"정산·환율",ep:[{n:"Splitwise",p:["다중 통화가 한 화면에 안 보이고, 환율 자동환산은 유료라 손계산"]},{n:"여행 가계부·환율앱(XE)",p:["결제마다 앱 열어 항목·금액을 손으로 찍고 영수증 촬영","살 때마다 앱 열어 자국 통화로 환산(암산은 나라마다 안 맞음)"]}]},
+{title:"예약·현지",ep:[{n:"TripIt",p:["스크린샷은 안 받고 원본 이메일만 인식, 실패하면 수동 입력"]},{n:"해외 맛집 예약(OpenTable/Tabelog)",p:["커버리지·수수료 때문에 컨시어지나 전화로 우회"]},{n:"메뉴 카메라 번역",p:["직역된 요리명이라 뭔지 몰라 다시 검색"]}]},
+{title:"사진·시차",ep:[{n:"여행 사진 EXIF·앨범",p:["카메라 시계를 현지로 안 바꿔 정렬이 깨져 시간을 수동 시프트","위치정보 없는 사진은 앨범을 손으로 이름 붙여 정리"]},{n:"항공권 타임존",p:["표시가 현지시각인지 헷갈려 비행시간·시차를 머릿속 계산"]}]}
+]},
+{id:"pet-micro",icon:"🐾",title:"반려동물",color:"#c77dff",subs:[
+{title:"급여·투약",ep:[{n:"급여 기록 앱(Pawfolio·똑똑집사)",p:["밥 줄 때마다 젖은 손으로 '먹였음'을 눌러야 함","간식 칼로리 10% 규칙을 간식마다 암산해 합산"]},{n:"월 1회 예방약(심장사상충)",p:["이미 준 것 같으면 약봉지·달력을 뒤져 마지막 투여일 확인"]},{n:"사료 급여표",p:["봉지는 컵, 저울은 g이라 환산·나눗셈을 매번 수동"]}]},
+{title:"건강·기록",ep:[{n:"접종 기록 앱(11pets)",p:["자동 알림 받으려면 종이 수첩 이력을 전부 수기 입력"]},{n:"가정용 반려동물 저울",p:["안 앉는 고양이는 안고 재서 사람 몸무게를 빼는 산수"]},{n:"증상 로그(반기다)",p:["구토·헤어볼 빈도를 그때그때 적어야 병원서 답함","원하는 항목이 없어 '메모'에 억지로 끼워 넣음"]}]},
+{title:"산책·사진·비상",ep:[{n:"GPS 산책 앱(Tractive·펫피)",p:["시작 누르는 걸 깜빡하면 산책이 통째로 날아감","앱을 백그라운드로 넘기면 경로가 튐"]},{n:"펫 카메라·독성 계산기·실종 전단",p:["움직여 흔들려 연사→흐린 것 지우고→크롭","먹은 양·체중을 재서 여러 사이트 대조, 전단은 사진·문구·방수까지 수작업"]}]}
+]},
+{id:"creator-micro",icon:"🎬",title:"콘텐츠 제작",color:"#ff375f",subs:[
+{title:"컷편집",ep:[{n:"필러워드 자동삭제(Descript)",p:["삭제 지점이 뚝뚝 끊겨 한 군데씩 다시 다듬음","'mm-hmm' 오탐을 하나씩 예외 처리"]},{n:"무음 컷편집",p:["자동을 안 쓰면 파형을 확대해 프레임 단위로 손수 자름"]},{n:"음악 비트싱크",p:["수동이면 비트마다 M키로 마커 찍고 클립을 밀어 맞춤"]}]},
+{title:"리프레임·자막",ep:[{n:"자동 리프레임(Auto Reframe)",p:["인물이 프레임 밖으로 나가 클립마다 위치 재배치"]},{n:"자동 자막(CapCut·Vrew)",p:["이름·전문용어 오인식을 블록마다 다시 타이핑","얼굴 가리는 자막을 클립마다 안전영역으로 드래그"]},{n:"유튜브 챕터",p:["자동 챕터가 부정확해 타임스탬프를 구간마다 수동 입력"]}]},
+{title:"색·오디오·마감",ep:[{n:"컬러 매치·오디오 노멀라이즈",p:["카메라·조명 다른 클립을 시작점만 자동, 컷마다 눈으로 조정","소스가 섞이면 클립을 골라 게인을 손으로 맞춤"]},{n:"배경 제거·모자이크/블러",p:["머리카락 엣지가 깨져 브러시로 가장자리 정리","움직이는 얼굴·번호판 마스크를 프레임마다 키프레임"]}]},
+{title:"배포",ep:[{n:"멀티 플랫폼 업로드",p:["플랫폼마다 로그인·재업로드·캡션 재입력 반복"]}]}
+]}
+];
+
+let D=D_INDUSTRY;
+let curDataset='industry';
+
 // ══════════ REVERSE DATA ══════════
 const catKw={'건강/신체':['아프','부상','질환','치아','시력','눈','피부','관절','허리','체력','살을','운동','재활','자세','코어','노화','주름','감기','소화','만성','건조','피로','수영','건강','예방'],'시간/편의':['시간','귀찮','번거롭','간편','빠르','급하','편한','24시간','직접'],'돈/비용':['비싸','저렴','절약','할인','비용','이자','요금','부담','무료','최저가','현금화','절감'],'불안/걱정':['불안','걱정','위험','유출','사기','침해','복잡'],'능력/성장':['역량','부족','못해','생산성','효율','감각','모르','배우','공부','전환'],'연결/소통':['소통','협업','만남','함께','친구','가족','네트워킹'],'공간/이동':['이동','공간','주차','거리','집','장소','살 곳','발품'],'여가/감정':['지루','스트레스','해소','여가','기분','쉬고','놀','문화','콘텐츠','게임','영상','음악'],'생활':['배가 고','먹고','요리','기름','전기','춥','온수','더럽','길어','관리','처분','장 ','간식','사료','수령'],'정보':['정보','비교','찾','탐색','모르겠','파악','검토','리뷰','버전']};
 const catIcon={'건강/신체':'🏥','시간/편의':'⏰','돈/비용':'💰','불안/걱정':'😰','능력/성장':'📈','연결/소통':'🤝','공간/이동':'🚗','여가/감정':'🎭','생활':'🏠','정보':'🔍','기타':'📌'};
-const revCats=new Map();
+let revCats=new Map();
+function buildRev(){revCats=new Map();
 D.forEach(d=>{d.subs.forEach(s=>{s.ep.forEach(e=>{e.p.forEach(p=>{
   let cat='기타';for(const[c,kws]of Object.entries(catKw)){if(kws.some(k=>p.includes(k))){cat=c;break}}
   if(!revCats.has(cat))revCats.set(cat,[]);
   revCats.get(cat).push({problem:p,sol:e.n,sub:s.title,domain:d.title,dIcon:d.icon,dColor:d.color,dId:d.id});
 })})})});
+}
+buildRev();
 
 // ══════════ STATE ══════════
 let view='forward',search='',openP=new Set();
@@ -273,8 +337,11 @@ function h(t){if(!search)return t;const i=t.toLowerCase().indexOf(search.toLower
 
 function updateHints(){
   const el=document.getElementById('hints');
-  const sol=['영화','카페','은행','수영장','정형외과','배달','미용실','게임'].map(x=>`<span class="hint" onclick="ds('${x}')">${x}</span>`).join('');
-  const prob=['배고픔','스트레스','불안','비싸다','시간 없다','고장','부족'].map(x=>`<span class="hint ph" onclick="ds('${x}')">${x}</span>`).join('');
+  const H=curDataset==='micro'
+    ?{sol:['굿노트','클로바노트','MyFitnessPal','구글맵','Splitwise','CapCut','리멤버'],prob:['일일이','되감','매번','스크린샷','환산','수기']}
+    :{sol:['영화','카페','은행','수영장','정형외과','배달','미용실','게임'],prob:['배고픔','스트레스','불안','비싸다','시간 없다','고장','부족']};
+  const sol=H.sol.map(x=>`<span class="hint" onclick="ds('${x}')">${x}</span>`).join('');
+  const prob=H.prob.map(x=>`<span class="hint ph" onclick="ds('${x}')">${x}</span>`).join('');
   el.innerHTML=sol+prob;
 }
 
@@ -346,31 +413,34 @@ document.getElementById('sc').addEventListener('click',()=>{search='';document.g
 window.tg=tg;window.ds=ds;window.goFW=goFW;window.setView=setView;
 
 // ══════════ GRAPH ══════════
-const gN=[],gE=[];let gid=0;
-const gCenter={id:gid++,type:'center',title:'현대 산업',icon:'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
-gN.push(gCenter);
-D.forEach(d=>{
-  const dn={id:gid++,type:'domain',title:d.title,icon:d.icon,color:d.color,r:16,did:d.id,subs:d.subs,x:0,y:0,vx:0,vy:0};
-  gN.push(dn);gE.push({s:gCenter.id,t:dn.id,tp:'cd'});
-  d.subs.forEach(sub=>{
-    const sn={id:gid++,type:'sub',title:sub.title,color:d.color,r:6,did:d.id,pDom:d.title,pIcon:d.icon,ep:sub.ep,x:0,y:0,vx:0,vy:0};
-    gN.push(sn);gE.push({s:dn.id,t:sn.id,tp:'ds'});
-    sub.ep.forEach(e=>{
-      const en={id:gid++,type:'solution',title:e.n,color:'#2ed573',r:3,did:d.id,pDom:d.title,pIcon:d.icon,pSub:sub.title,probs:e.p,x:0,y:0,vx:0,vy:0};
-      gN.push(en);gE.push({s:sn.id,t:en.id,tp:'se'});
-      e.p.forEach(pr=>{
-        const pn={id:gid++,type:'problem',title:pr,color:'#ff4757',r:2.5,did:d.id,pSol:e.n,pDom:d.title,pSub:sub.title,x:0,y:0,vx:0,vy:0};
-        gN.push(pn);gE.push({s:en.id,t:pn.id,tp:'sp'});
+let gN=[],gE=[],gid=0,gCenter=null;
+function buildGraph(){
+  gN=[];gE=[];gid=0;
+  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':'현대 산업',icon:curDataset==='micro'?'🔎':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
+  gN.push(gCenter);
+  D.forEach(d=>{
+    const dn={id:gid++,type:'domain',title:d.title,icon:d.icon,color:d.color,r:16,did:d.id,subs:d.subs,x:0,y:0,vx:0,vy:0};
+    gN.push(dn);gE.push({s:gCenter.id,t:dn.id,tp:'cd'});
+    d.subs.forEach(sub=>{
+      const sn={id:gid++,type:'sub',title:sub.title,color:d.color,r:6,did:d.id,pDom:d.title,pIcon:d.icon,ep:sub.ep,x:0,y:0,vx:0,vy:0};
+      gN.push(sn);gE.push({s:dn.id,t:sn.id,tp:'ds'});
+      sub.ep.forEach(e=>{
+        const en={id:gid++,type:'solution',title:e.n,color:'#2ed573',r:3,did:d.id,pDom:d.title,pIcon:d.icon,pSub:sub.title,probs:e.p,x:0,y:0,vx:0,vy:0};
+        gN.push(en);gE.push({s:sn.id,t:en.id,tp:'se'});
+        e.p.forEach(pr=>{
+          const pn={id:gid++,type:'problem',title:pr,color:'#ff4757',r:2.5,did:d.id,pSol:e.n,pDom:d.title,pSub:sub.title,x:0,y:0,vx:0,vy:0};
+          gN.push(pn);gE.push({s:en.id,t:pn.id,tp:'sp'});
+        });
       });
     });
   });
-});
+  let di=0;const dc=D.length;
+  gN.forEach(n=>{if(n.type==='center'){n.x=0;n.y=0;return}if(n.type==='domain'){const a=(Math.PI*2/dc)*di+Math.PI/6;di++;n.x=Math.cos(a)*300;n.y=Math.sin(a)*300;return}
+  const pe=gE.find(e=>e.t===n.id);if(pe){const p=gN[pe.s];const sp=n.type==='sub'?150:n.type==='solution'?80:50;n.x=p.x+(Math.random()-.5)*sp*2;n.y=p.y+(Math.random()-.5)*sp*2}});
+}
+buildGraph();
 
 function gFamily(nid){const f=new Set([nid]);let c=nid;while(true){const pe=gE.find(e=>e.t===c);if(!pe)break;f.add(pe.s);c=pe.s}function desc(id){gE.forEach(e=>{if(e.s===id){f.add(e.t);desc(e.t)}})}desc(nid);return f}
-
-let di=0;const dc=D.length;
-gN.forEach(n=>{if(n.type==='center'){n.x=0;n.y=0;return}if(n.type==='domain'){const a=(Math.PI*2/dc)*di+Math.PI/6;di++;n.x=Math.cos(a)*300;n.y=Math.sin(a)*300;return}
-const pe=gE.find(e=>e.t===n.id);if(pe){const p=gN[pe.s];const sp=n.type==='sub'?150:n.type==='solution'?80:50;n.x=p.x+(Math.random()-.5)*sp*2;n.y=p.y+(Math.random()-.5)*sp*2}});
 
 const cv=document.getElementById('cv'),cx=cv.getContext('2d');
 let gW,gH,dpr;
@@ -470,6 +540,24 @@ function doGraphSearch(kw){
 let gInit=false;
 function initGraph(){if(gInit)return;gInit=true;gResize();window.addEventListener('resize',()=>{if(view==='graph')gResize()})}
 function renderGraph(){gSim();gDraw();requestAnimationFrame(renderGraph)}
+
+// ══════════ DATASET TOGGLE ══════════
+function setDataset(name){
+  if(curDataset===name)return;
+  curDataset=name;
+  D=name==='micro'?D_MICRO:D_INDUSTRY;
+  document.querySelectorAll('.ds-tab').forEach(b=>b.classList.toggle('active',b.dataset.ds===name));
+  const sub=document.getElementById('topSub');
+  if(sub)sub.textContent=name==='micro'
+    ?'솔루션은 있는데 여전히 손이 가는 아주 작은 불편들 — 실제 리뷰·포럼 근거 기반'
+    :'문제가 솔루션을 만든다 — 세 가지 뷰로 탐색하세요';
+  search='';document.getElementById('si').value='';openP.clear();gActive=null;
+  cam={x:0,y:0,z:0.4};
+  buildRev();buildGraph();
+  updateHints();render();
+  if(view==='graph')gResize();
+}
+window.setDataset=setDataset;
 
 // START
 updateHints();render();

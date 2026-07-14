@@ -1,0 +1,545 @@
+{
+  "_meta": {
+    "title": "미세 불편(Micro-frictions) 데이터셋",
+    "desc": "기존 솔루션이 존재하지만 특정 이벤트에서 여전히 수동으로 하는 아주 작은 불편. index.html의 D 스키마와 호환(id/icon/title/color/subs[].ep[].{n,p}). 각 ep에 ev(근거: 실제 리뷰/포럼 인용 + URL) 필드를 추가함.",
+    "schema": "domain{id,icon,title,color,subs:[{title,ep:[{n:솔루션, p:[미세불편], ev:[근거+URL]}]}]}",
+    "researched": "2026-07-14"
+  },
+  "D": [
+    {
+      "id": "edu-micro", "icon": "🎓", "title": "교육·학습", "color": "#5ac8fa",
+      "subs": [
+        {
+          "title": "필기·노트앱",
+          "ep": [
+            {
+              "n": "굿노트(Goodnotes)",
+              "p": ["PDF로 내보내면 손글씨가 사라져 페이지마다 스크린샷으로 다시 공유", "페이지가 쌓이거나 오래 켜두면 펜이 버벅여 앱을 껐다 켬", "손글씨 검색은 인덱싱이 끝날 때까지 기다리거나 언어를 바꿨다 되돌려 재인덱싱"],
+              "ev": ["App Store ★★ '연필로 필기 다한거 pdf로 변환해 공유하면 안에 글씨 다 날아가 안보임' — apps.apple.com/kr/app/goodnotes-ai.../id1444383602", "App Store ★★ '많은 페이지를 켜놓으면 필기할때 버벅여서 창을 껐다 켜야해요'", "Goodnotes 지원 'wait until indexing finishes… try re-indexing by changing the recognition language' — support.goodnotes.com"]
+            }
+          ]
+        },
+        {
+          "title": "강의 기록·복습",
+          "ep": [
+            {
+              "n": "클로바노트",
+              "p": ["편집하면 음성을 못 듣고 들으면 편집이 안 돼 재생·정지를 수십 번 반복", "편집을 누르면 커서가 듣던 지점이 아닌 엉뚱한 위쪽 문단으로 튐"],
+              "ev": ["App Store '편집을 누르면 듣던 지점이 아니라 더 위 내용으로 페이지가 올라가버려요… 음성을 들으려면 편집을 못하더라구요' — apps.apple.com/kr/app/클로바노트/id1530010245"]
+            },
+            {
+              "n": "인강 플레이어(Coursera/edX)",
+              "p": ["기관 관리자가 스킵을 막아두면 놓친 10초를 되감으려 처음부터 재생하거나 진도바를 미세하게 더듬음"],
+              "ev": ["Coursera 지원 'learners in an organization's program may not be able to skip ahead if the feature has been disabled by your administrator' — coursera.support"]
+            }
+          ]
+        },
+        {
+          "title": "암기·레퍼런스",
+          "ep": [
+            {
+              "n": "Anki·Quizlet",
+              "p": ["노트·슬라이드를 카드로 옮기려면 질문-답 쌍을 45분씩 복붙(한 번 해보고 포기)", "이미지 오클루전은 마스크가 늘수록 생성·편집이 극도로 느려져 외부 애드온으로 갈아탐"],
+              "ev": ["cuadernote 'spend 45 minutes copy-pasting before you even start studying… most people try this once and never do it again'", "Anki 포럼 'creating/editing masks becoming extremely slow and laggy as the number of masks increases' — forums.ankiweb.net/t/…/52954"]
+            },
+            {
+              "n": "Zotero",
+              "p": ["참고문헌을 복붙하면 이탤릭·들여쓰기가 딸려와 항목마다 손으로 정리, 워드에서 직접 고치면 연동이 끊김"],
+              "ev": ["Zotero 포럼 'paste without italics / remove indentation' 요청 반복 — forums.zotero.org/discussion/92542"]
+            }
+          ]
+        },
+        {
+          "title": "협업·시간표·자료뷰",
+          "ep": [
+            {
+              "n": "에브리타임",
+              "p": ["학교·학기 데이터가 없으면 강의명·시간·강의실을 손으로 하나씩 등록", "구글 캘린더 직접 연동이 없어 강의를 캘린더에 재입력(변환 도구가 자생)"],
+              "ev": ["나무위키 '누군가 시간표를 정리해 보내지 않으면 아무도 시간표를 만들 수 없어 미리 못 짜 불편'", "EveryCal/EveryCalendar 같은 ics 변환 도구 존재가 방증 — github.com/minsoo0715/EveryCalendar"]
+            },
+            {
+              "n": "Google Docs 팀플",
+              "p": ["조원들이 각자 붙여넣은 글의 폰트·크기·색이 제각각이라 제출 직전 전체 서식을 통일"],
+              "ev": ["spellapp 'each contribution brings its own unique style with various fonts, sizes, and colors'"]
+            },
+            {
+              "n": "PDF 리더 다크모드",
+              "p": ["앱 UI만 어두워지고 PDF 배경은 흰색 그대로라 밤에 눈부셔서 파일마다 색상 반전·대비를 따로 조정"],
+              "ev": ["삼성 멤버스 Q&A '삼성노트 흰색 PDF를 검은 화면으로 보는 방법'(다크모드로도 배경은 그대로)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "office-micro", "icon": "💼", "title": "직장·사무", "color": "#af52de",
+      "subs": [
+        {
+          "title": "경비·문서 정산",
+          "ep": [
+            {
+              "n": "영수증 스캔 + 경비 엑셀",
+              "p": ["찍어도 결국 날짜·상호·금액을 엑셀에 한 줄씩 옮겨 적음", "엑셀 정산과 그룹웨어 결재에 같은 내용을 두 번 입력"],
+              "ev": ["스팬딧 '영수증 한 장 한 장 스캔하는 일… 엑셀에 영수증 내역 옮겨 적는 일' — spendit.kr/blog"]
+            },
+            {
+              "n": "계약서 PDF 서명",
+              "p": ["전자서명 도구를 안 쓰면 출력→서명→스캔→재전송을 반복, 도장 이미지 위치도 매번 수동"],
+              "ev": ["로폼 매거진 '계약서에 서명할 때마다 출력하고 스캔하고 다시 보내는 번거로운 과정' — lawform.io/magazine/885"]
+            }
+          ]
+        },
+        {
+          "title": "명함·회의",
+          "ep": [
+            {
+              "n": "리멤버·캠카드",
+              "p": ["규격 외·흐린 명함은 주소·직장이 뒤바뀌어 등록 시 직접 고침", "여러 장 찍으면 '수기 입력 중'이라 결과를 기다림"],
+              "ev": ["클리앙 후기 '규격외 명함은 주소나 직장등이 뒤바껴서 입력' + '이거 입력하는 알바를 했었거든요' — clien.net/service/board/park/8534556"]
+            },
+            {
+              "n": "AI 회의록(클로바노트·티로)",
+              "p": ["여러 명이 겹쳐 말하면 화자 라벨을 수동으로 바로잡음", "1시간+ 요약에서 빠진 액션아이템·오기록을 편집"],
+              "ev": ["삼쩜삼/티로 '여러 사람이 대화하면 누가 한 말인지 구별하기 쉽지 않고 한 시간 넘는 대화 요약도 간단치 않다'"]
+            },
+            {
+              "n": "캘린더·Calendly",
+              "p": ["예약 링크를 안 쓰는 상대와는 '3-5PM EST면 제 10AM GMT인데 화요일만…' 식 시간대 환산 메일을 반복"],
+              "ev": ["OnceHub 조사 '전문직 83%가 시간대 다른 참석자와의 일정 조율을 주요 pain point로 꼽음'"]
+            }
+          ]
+        },
+        {
+          "title": "오피스 서식 지옥",
+          "ep": [
+            {
+              "n": "엑셀→워드/아웃룩 붙여넣기",
+              "p": ["그냥 붙이면 열 너비·정렬·테두리가 흐트러져 매번 붙여넣기 옵션을 고르거나 표를 다시 정렬"],
+              "ev": ["MS Answers 'How can I preserve column widths when copy-and-pasting from Excel to Word?' → Paste Special로 우회"]
+            },
+            {
+              "n": "PowerPoint 붙여넣기",
+              "p": ["외부 자료를 붙이면 서식이 현재 테마에 맞춰 멋대로 바뀌어 폰트·색을 하나씩 다시 잡음"],
+              "ev": ["PowerPoint MVP '옵션-고급의 서식 자동 조정을 매번 해제해야' — powerpointmvp.wordpress.com"]
+            },
+            {
+              "n": "엑셀 '텍스트로 저장된 숫자'",
+              "p": ["초록 삼각형을 셀마다 눌러 숫자로 변환하거나 여분 공백을 지워야 합계·정렬이 됨"],
+              "ev": ["MS 공식 지원 'green triangle… number is stored as text' 별도 문서로 다룰 만큼 흔함 — support.microsoft.com"]
+            }
+          ]
+        },
+        {
+          "title": "커뮤니케이션·파일",
+          "ep": [
+            {
+              "n": "이메일 첨부",
+              "p": ["파일을 빠뜨리고 전송해 '첨부파일 다시 보냅니다' 사과 메일을 재전송(UI가 첨부 여부를 한눈에 안 보여줌)"],
+              "ev": ["클라우다이크 ''첨부파일 추가합니다' 사과 메일을 한 번쯤 보내본 직장인이 많다'"]
+            },
+            {
+              "n": "파일 버전 관리",
+              "p": ["'최종_진짜최종_v2'처럼 버전을 손으로 붙이고 나중에 최신본을 하나씩 열어 확인"],
+              "ev": ["Threads '최종최종진짜최종.ppt / 수정본(진짜).xlsx… 찾을 때마다 헷갈리고 버전 관리도 엉망'"]
+            },
+            {
+              "n": "슬랙·팀즈 요청",
+              "p": ["채팅으로 온 '금요일까지 해줘'를 할 일 앱으로 옮겨 적지 않으면 다른 메시지에 밀려 묻힘"],
+              "ev": ["deemerge 'Slack is built for communication, not task management… the request is gone'"]
+            },
+            {
+              "n": "스크린샷 공유",
+              "p": ["이메일·전화번호·계좌를 눈으로 찾아 매번 검은 박스·모자이크를 손으로 그림"],
+              "ev": ["TechSmith Smart Redact 'No more manually combing through screenshots to find and redact sensitive information'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cook-micro", "icon": "🍳", "title": "요리·주방", "color": "#34c759",
+      "subs": [
+        {
+          "title": "레시피 보며 조리",
+          "ep": [
+            {
+              "n": "요리 영상(틱톡/릴/유튜브)",
+              "p": ["'쿠민 얼마였지?' 계량 확인하려고 젖은 손으로 방금 장면을 되감음", "저장한 릴 캡션에 레시피가 없어 영상을 돌려보며 손으로 받아씀(원본 삭제되면 안 열림)"],
+              "ev": ["pluckrecipes 'scrubbing through a video with wet hands trying to catch how much cumin to add'", "foodieprep 'not all creators put the full recipe in the caption'"]
+            },
+            {
+              "n": "폰 레시피 화면",
+              "p": ["자동 잠금·저전력 모드로 화면이 꺼져 기름 묻은 손으로 톡톡 두드림", "반죽·생닭 만진 손으로 다음 단계 넘기려 손을 씻거나 너클로 스크롤"],
+              "ev": ["Apple 커뮤니티 'Phone fades out while reading a recipe. Can it stay on?'", "TastingTable 'Touching your phone with dirty hands… can transfer bacteria'"]
+            },
+            {
+              "n": "레시피 블로그",
+              "p": ["재료·본문 전에 작성자 여행기·가족 이야기가 길게 나와 광고 사이로 한참 스크롤"],
+              "ev": ["nextcloud cookbook issue 'Cooking mode' 요청 + 만개의레시피 광고·로딩 불만 리뷰"]
+            }
+          ]
+        },
+        {
+          "title": "장보기·재고",
+          "ep": [
+            {
+              "n": "냉장고 관리 앱",
+              "p": ["바코드 없는 신선식품(대파 반단, 남은 두부)은 수기 입력, '다 입력하고 확인하기 귀찮아' 결국 앱을 안 열게 됨"],
+              "ev": ["dailypop '식재료를 모두 입력하고 또 확인하기가 귀찮은 점'"]
+            },
+            {
+              "n": "쇼핑리스트 자동 병합",
+              "p": ["단위·명칭이 다르면(1 tbsp vs 15 ml, 대파 vs 파) 자동 병합이 안 돼 연필 아이콘 눌러 수동으로 합침"],
+              "ev": ["Plan to Eat 'for items to merge, their title and units must match… manually merge by clicking the pencil icon'"]
+            }
+          ]
+        },
+        {
+          "title": "계량·환산",
+          "ep": [
+            {
+              "n": "인분(serving) 스케일러",
+              "p": ["계란 1개짜리를 반으로 줄이면 '0.5개'로만 떠서 실제로는 풀어서 무게(약 25g)로 다시 잼(베이킹은 더 골치)"],
+              "ev": ["Quora 'cut a baking recipe in half but it calls for 1 egg. How do I halve that?' → 풀어서 무게로 절반"]
+            },
+            {
+              "n": "컵↔그램 환산 / 대체재 검색",
+              "p": ["재료마다 밀도가 달라(밀가루 1컵≈120g, 설탕≈200g) 한 번에 안 변환돼 재료별로 검색", "없는 재료(버터밀크 등) 대체법을 레시피 밖에서 따로 검색·실행"],
+              "ev": ["대형 베이킹 사이트마다 버터밀크 대체 전용 가이드 운영 'add 1 tbsp vinegar to 1 cup milk, wait 5-10 min'"]
+            }
+          ]
+        },
+        {
+          "title": "조리 관리",
+          "ep": [
+            {
+              "n": "멀티 타이머",
+              "p": ["기본 타이머는 하나뿐이라 밥·국·구이를 매번 지우고 새로 설정", "어느 알람이 어느 냄비인지 라벨을 손으로 붙여 구분"],
+              "ev": ["Adweek 'apps that help cooks juggle more than one dish' — 기본 타이머 한계로 전용 앱이 계속 출시"]
+            },
+            {
+              "n": "밀프렙 라벨",
+              "p": ["통마다 날짜·내용물을 손으로 적고, 차갑거나 젖은 통엔 펜이 잘 안 써짐(무라벨이면 '젤라토인 줄 알았는데 그레이비')"],
+              "ev": ["theKitchn 'label while at room temperature… reaching for chocolate gelato only to find it's gravy'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parenting-micro", "icon": "🍼", "title": "육아", "color": "#ff8fab",
+      "subs": [
+        {
+          "title": "수유·수면 기록",
+          "ep": [
+            {
+              "n": "수유/수면 타이머",
+              "p": ["정지 버튼을 깜빡하면 '수유 47분'으로 남아 시·분을 눌러 실제 시간으로 보정", "밤잠은 배터리 때문에 타이머를 못 켜 잠든·깬 시각을 아침에 수기 입력"],
+              "ev": ["앱 리뷰 'forget to pause the nursing timer and then the time is incorrect' + Nara가 24시간+ 세션에 빨간 경고 추가"]
+            },
+            {
+              "n": "기록 앱 UI",
+              "p": ["한 팔로 아기 안고 남은 손 엄지로 작은 버튼을 누르기 어려움", "시각을 스크롤 휠로 20분 전으로 맞추는 데 오래 걸림"],
+              "ev": ["Google Play 'not designed for a mum with 1 hand feeding a baby… small and fiddly'", "리뷰 'scroll through hours and minutes takes forever'"]
+            },
+            {
+              "n": "유축 기록 앱",
+              "p": ["자다 깨서 유축하는데 방금 좌/우 어느 쪽이었는지 깜빡해 매번 지정하거나 추측"],
+              "ev": ["ParentLove 'remembers your Last Used side, helps prevent forgetting which side you last pumped'(불편의 방증)"]
+            }
+          ]
+        },
+        {
+          "title": "건강·투약",
+          "ep": [
+            {
+              "n": "해열제 교차 복용",
+              "p": ["타이레놀↔부루펜 교차 시 마지막 준 시각·용량을 손으로 적어 4~8시간 간격을 계산(이중투약 방지)"],
+              "ev": ["AAP HealthyChildren 'Write down the time given and amount… track carefully to avoid double dosing'"]
+            },
+            {
+              "n": "성장곡선 앱",
+              "p": ["영유아 검진·소아과에서 잰 몸무게·키·머리둘레를 매번 손으로 옮겨 적음(자동 연동 없음)"],
+              "ev": ["Growth 앱 'monitor without relying on memory or your pediatrician's notes'(=수기 입력 전제)"]
+            },
+            {
+              "n": "이유식 알레르기 로그",
+              "p": ["새 재료를 3일 간격으로 먹이며 발진·변 상태를 기록, 비-IgE 반응은 48~72시간 뒤라 지난 며칠을 되짚음"],
+              "ev": ["freetofeed 'non-IgE allergies show up 48-72h after ingestion… detailed logging apps helpful'"]
+            }
+          ]
+        },
+        {
+          "title": "공유·기관 소통",
+          "ep": [
+            {
+              "n": "부부 공동 기록",
+              "p": ["같은 iCloud/Dropbox를 쓰거나 이메일 초대로 계정을 만들어야 공유돼, 안 맞으면 같은 수유를 두 번 기록"],
+              "ev": ["Baby Tracker FAQ 'all devices must be linked to the same iCloud/Dropbox account'"]
+            },
+            {
+              "n": "가족 사진앱(Tinybeans)",
+              "p": ["조부모가 찍은 손주 사진을 부모가 받아서 대신 업로드하거나 권한을 따로 설정"],
+              "ev": ["리뷰 'grandparents take lots of photos… I would love for them to add them in'"]
+            },
+            {
+              "n": "키즈노트 알림장",
+              "p": ["매일 부모 댓글에 뭐라 쓸지 막막해 '감사합니다'를 반복 작성", "준비물 공지는 '읽음'까지만, 실제 챙기는 건 캘린더·메모로 따로 옮김"],
+              "ev": ["16년차 교사 블로그 '키즈노트 댓글 꼭 달아야 하나요? 매일 똑같이 감사합니다라고만 써도 될까?'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fitness-micro", "icon": "💪", "title": "운동·헬스", "color": "#5856d6",
+      "subs": [
+        {
+          "title": "웨이트 기록",
+          "ep": [
+            {
+              "n": "Strong·Hevy·번핏",
+              "p": ["세트마다 무게·횟수를 타이핑해 쉬는 시간의 절반이 기록에 날아감(스트랩·초크·땀 묻은 손엔 입력도 안 됨)", "세트 완료 체크에 'select all'이 없어 5세트를 하나씩 탭", "슈퍼세트는 두 종목 사이를 매 세트 스크롤해 이동"],
+              "ev": ["tuffwraps 'Typing a set takes 15-20 seconds… by the time you're done, half your rest period is gone'", "번핏 리뷰 'select all 버튼이 있으면'", "Hevy가 'Smart superset scrolling'을 별도 기능화(마찰 방증)"]
+            },
+            {
+              "n": "RepCount 통계",
+              "p": ["이번 주 가슴·등 부위별 총 세트·볼륨을 한눈에 안 보여줘 그래프를 일일이 보며 손으로 합산"],
+              "ev": ["RepCount 리뷰 '주간 부위당 총 세트수·볼륨을 그래프 확인하며 수작업으로 계산'"]
+            }
+          ]
+        },
+        {
+          "title": "식단 기록",
+          "ep": [
+            {
+              "n": "MyFitnessPal",
+              "p": ["집밥 재료를 매번 하나씩 검색·등록(12개면 매번 10~20분)", "바코드 스캔값이 자주 틀려 실물 영양성분표와 눈으로 대조", "저울 32g을 서빙 수(32÷28=1.14)로 나눗셈해 입력", "매일 같은 아침을 날짜만 바꿔 Quick Tools로 다시 복사"],
+              "ev": ["nutrola 'manually enter every ingredient… 12 ingredients takes 10-20 minutes every single time'", "'verify a barcode entry by manually comparing against the physical label every time'", "MFP 커뮤니티 '32g → enter as 1.14 servings of 1 oz'"]
+            }
+          ]
+        },
+        {
+          "title": "유산소·측정",
+          "ep": [
+            {
+              "n": "Garmin/Strava 오토포즈",
+              "p": ["신호등에서 멈춘 뒤 재개가 늦거나 안 돼 거리·궤적이 누락", "종료를 깜빡하면 귀갓길이 섞여 활동을 손으로 잘라냄(자르기는 되돌릴 수 없음)"],
+              "ev": ["Garmin 포럼 'paused at traffic lights but forgot to restart until 15km later. recover?'", "Strava 'trimmed activity cannot be undone'"]
+            },
+            {
+              "n": "InBody 앱",
+              "p": ["헬스장 인바디가 클라우드 연동 안 되거나 QR이 없으면 체중·골격근량·체지방률을 손으로 옮겨 적음"],
+              "ev": ["Blind '헬생아 인바디 앱 깔아놓고 수기입력만 해왔습니다'"]
+            },
+            {
+              "n": "물 섭취 트래커",
+              "p": ["정해둔 250ml를 원탭으로 넣는 위젯이 없어 앱을 열고 양을 고르거나 + 버튼을 여러 번 탭"],
+              "ev": ["기능 요청 'want a widget to add 250ml water with one tap'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "travel-micro", "icon": "✈️", "title": "여행", "color": "#0abde3",
+      "subs": [
+        {
+          "title": "동선·일정 계획",
+          "ep": [
+            {
+              "n": "구글맵 저장 리스트",
+              "p": ["정렬·폴더가 없어 200곳을 방문 순서대로 하나씩 드래그", "리스트에서 바로 경로를 못 걸어 '다음 목적지'로 안 이어짐", "영업일·정기휴무를 장소마다 눌러 확인"],
+              "ev": ["theunconventionalroute 'not possible to sort a list alphabetically or by date… with 200+ places this is a dealbreaker'"]
+            },
+            {
+              "n": "엑셀 여행 일정표",
+              "p": ["PC에서 짠 표가 모바일 접근성이 나쁘고 현지에서 실시간 수정이 안 돼 노션으로 다시 옮김"],
+              "ev": ["brunch '엑셀은 모바일 접근성이 나쁘고 새로 알아낸 정보를 실시간 반영할 수 없다'"]
+            }
+          ]
+        },
+        {
+          "title": "정산·환율",
+          "ep": [
+            {
+              "n": "Splitwise",
+              "p": ["다중 통화가 한 화면에 안 보이고 대시보드가 한 통화만 표시", "환율 자동환산은 Pro 유료라 무료 사용자는 손으로 환율 계산"],
+              "ev": ["사용자 Tom Voirol 'interface is clearly made for single currency… an unholy mess very quickly'"]
+            },
+            {
+              "n": "여행 가계부(트라비포켓)·환율앱(XE)",
+              "p": ["결제마다 앱 열어 항목·금액·카테고리를 손으로 찍고 영수증을 촬영해 붙임", "살 때·팁 낼 때마다 앱 열어 자국 통화로 환산(암산 지름길은 나라마다 안 맞음)"],
+              "ev": ["트라비포켓 '지출 항목을 적으면 바로 환율 적용'(=입력은 수동)", "Rick Steves 포럼 'There are times when accuracy matters… an app can help assure I am on budget'"]
+            }
+          ]
+        },
+        {
+          "title": "예약·현지",
+          "ep": [
+            {
+              "n": "TripIt",
+              "p": ["스크린샷·복붙은 안 받고 원본 확인 이메일만 인식, 자동 인식이 실패하면 항목을 수동으로 재입력"],
+              "ev": ["TripIt 지원 'does not accept screenshots… forward the original confirmation email'"]
+            },
+            {
+              "n": "해외 맛집 예약(OpenTable/Tabelog)",
+              "p": ["OpenTable은 일본 커버리지가 낮고 Tabelog 영어 예약은 건당 ¥440 수수료라 결국 컨시어지·전화로 우회"],
+              "ev": ["japantravelpros 'OpenTable limited for Japanese restaurants'; 'Tabelog English booking ¥440 non-refundable'"]
+            },
+            {
+              "n": "메뉴 카메라 번역",
+              "p": ["번역은 되지만 직역된 요리명이라 실제 뭔지 몰라 요리명을 다시 검색"],
+              "ev": ["Rick Steves 포럼 'translating menu can still require additional Google searches to understand dish names'"]
+            }
+          ]
+        },
+        {
+          "title": "사진·시차",
+          "ep": [
+            {
+              "n": "여행 사진 EXIF·앨범",
+              "p": ["카메라 시계를 현지 시각으로 안 바꿔 정렬이 깨져 사진 묶음을 골라 '몇 시간 시프트'를 수동 계산", "위치정보 없는 사진은 자동 그룹핑에서 빠져 앨범을 손으로 이름 붙여 정리"],
+              "ev": ["lightroomqueen 'EXIF does not provide an official field for time zone'(Shift Date Range/exiftool 수동 보정)"]
+            },
+            {
+              "n": "항공권 타임존",
+              "p": ["표시가 현지시각인지 조정 전인지 헷갈려 비행시간과 시차 보정을 머릿속으로 분리해 계산"],
+              "ev": ["포럼 토론 'people confuse flight time and time zone adjustment'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pet-micro", "icon": "🐾", "title": "반려동물", "color": "#c77dff",
+      "subs": [
+        {
+          "title": "급여·투약",
+          "ep": [
+            {
+              "n": "급여 기록 앱(Pawfolio·똑똑집사)",
+              "p": ["밥 줄 때마다 젖은 손으로 앱 열어 '먹였음'을 눌러야 하고 안 누르면 무의미(가족이 또 주거나 아무도 안 줌)", "훈련 간식 칼로리 '하루 10% 규칙'을 간식마다 찾아 합산(소형견은 여유가 ~18kcal뿐)"],
+              "ev": ["Pawfolio 슬로건 'Has anyone fed the dog? solves disputes about who fed the cat'", "AKC/UC Davis '10% 규칙은 식사·간식·트릿·식탁 음식까지 포함'"]
+            },
+            {
+              "n": "월 1회 예방약(심장사상충)",
+              "p": ["'이미 준 것 같은데' 싶으면 약봉지·달력을 뒤져 마지막 투여일을 되짚음, 줄 때마다 '완료' 체크 안 하면 무용지물"],
+              "ev": ["Dogster/dvm360 '심장사상충 약을 깜빡했어요'가 상시 주제, 정확한 날짜 못 기억하면 수의사 문의"]
+            },
+            {
+              "n": "사료 급여표",
+              "p": ["봉지는 '하루 O컵', 저울은 g이라 컵↔g 환산과 하루 두 끼 나눗셈을 사료 바꿀 때마다 수동"],
+              "ev": ["급여 앱은 '간편 기록'을 내세우지만 급여량 환산은 사용자 몫(컵-그램 반복 질문)"]
+            }
+          ]
+        },
+        {
+          "title": "건강·기록",
+          "ep": [
+            {
+              "n": "접종 기록 앱(11pets)",
+              "p": ["다음 접종 자동 알림을 받으려면 종이 수첩의 과거 백신명·날짜를 전부 수기 입력(병원마다 양식 달라 대조)"],
+              "ev": ["PetHub '옛 병원 원본을 보고 모든 항목을 적어둔 뒤 새 병원 사본과 누락 대조하라'"]
+            },
+            {
+              "n": "가정용 반려동물 저울",
+              "p": ["펫 저울에 안 앉는 고양이는 사람이 먼저 재고→안고 다시 재고→뺄셈을 손으로 해 입력(매번 두 번 측정)"],
+              "ev": ["Catster/Quora '안을 수 없는 고양이는 안고 사람 저울로 잰 뒤 자기 몸무게를 뺀다'"]
+            },
+            {
+              "n": "증상 로그 앱(반기다)",
+              "p": ["구토·헤어볼 빈도를 그때그때 적어야 병원서 답하는데 정신없어 놓침", "배변·간식 등 원하는 항목이 없어 '메모'에 억지로 끼워 넣어 통계가 안 됨"],
+              "ev": ["반기다 리뷰 '배변·간식·이상증세를 기록하려는데 항목이 없어 메모로 대체… 카테고리를 추가·수정할 수 있으면'"]
+            }
+          ]
+        },
+        {
+          "title": "산책·사진·비상",
+          "ep": [
+            {
+              "n": "GPS 산책 앱(Tractive·펫피)",
+              "p": ["나가기 전 '산책 시작'을 깜빡하면 그날 산책이 통째로 날아감", "앱을 백그라운드로 넘기면 GPS가 튀고, '종료'를 안 누르면 계속 켜져 배터리·거리 오류"],
+              "ev": ["Tractive 도움말 'keep the app in the foreground… closing or switching reduces tracking accuracy'"]
+            },
+            {
+              "n": "펫 카메라 / 독성 계산기·실종 전단",
+              "p": ["움직여 흔들려 연사→흐린 것 지우고→잘 나온 한 장 크롭", "먹은 양·체중을 재서 여러 사이트를 대조, 실종 전단은 사진·문구·인쇄·방수 코팅까지 수작업"],
+              "ev": ["Animal Humane Society '초점 유지가 가장 큰 고충, 가만히 못 있어 흔들려 흐릿'", "Pet FBI '표지판마다 사진 출력·비닐·검정 매직으로 방수 처리'"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creator-micro", "icon": "🎬", "title": "콘텐츠 제작", "color": "#ff375f",
+      "subs": [
+        {
+          "title": "컷편집",
+          "ep": [
+            {
+              "n": "필러워드 자동삭제(Descript)",
+              "p": ["'음·어'를 한 번에 지운 뒤 컷이 뚝뚝 끊겨 한 군데씩 다시 들으며 다듬음", "'mm-hmm'을 필러로 오탐하거나 단어 끝소리를 잘라내 하나씩 예외 처리"],
+              "ev": ["Descript 피드백 'the resulting video cut feels abrupt and choppy… jarring and looks unpolished'"]
+            },
+            {
+              "n": "무음 컷편집",
+              "p": ["자동 도구를 안 쓰면 파형을 확대·축소하며 말 사이 빈 구간을 프레임 단위로 손수 자름(2시간 원본→3분)"],
+              "ev": ["클리앙 '영상편집이 엄청난 노가다인가 봅니다'(3분 영상에 2시간+ 원본)", "opus 'going frame by frame, slicing out awkward silences by hand'"]
+            },
+            {
+              "n": "음악 비트싱크",
+              "p": ["수동이면 비트마다 M키로 마커를 찍고 클립을 몇 프레임씩 밀어 맞춤(120BPM 3분=360비트)"],
+              "ev": ["opus 'a 3-min track at 120 BPM has 360 beats, nobody wants to mark all by hand… lots of M-key tapping'"]
+            }
+          ]
+        },
+        {
+          "title": "리프레임·자막",
+          "ep": [
+            {
+              "n": "자동 리프레임(Auto Reframe)",
+              "p": ["16:9→9:16 변환 뒤 자동 추적이 인물을 중앙에 못 잡아 클립을 하나하나 돌려보며 위치 재배치"],
+              "ev": ["Adobe 커뮤니티 'I go clip by clip and adjust the positions of those who are not centered'"]
+            },
+            {
+              "n": "자동 자막(CapCut·Vrew)",
+              "p": ["이름·전문용어·동음이의어 오인식을 자막 블록마다 더블클릭해 다시 타이핑", "얼굴(눈·입) 가리는 자막을 클립마다 안전영역으로 드래그"],
+              "ev": ["CapCut 공식 '배경음·억양·빠른 말로 오인식되며 수동 수정 지원'(=교정 전제)", "blitzcutai 'captions over eyes/mouth hurt performance… tap and drag to reposition'"]
+            },
+            {
+              "n": "유튜브 챕터",
+              "p": ["자동 챕터가 부정확해 영상을 보며 멈추고→설명란으로 전환→타임스탬프+제목 입력→재생을 구간마다 반복"],
+              "ev": ["'pausing, switching to the description, typing timestamp and title… repeating for every section'"]
+            }
+          ]
+        },
+        {
+          "title": "색·오디오·마감",
+          "ep": [
+            {
+              "n": "컬러 매치 / 오디오 노멀라이즈",
+              "p": ["카메라·조명 다른 클립을 자동 매칭은 시작점으로만 쓰고 컷마다 눈으로 톤 조정", "소스가 섞이면 클립을 골라 우클릭→노멀라이즈하거나 게인을 손으로 맞춤"],
+              "ev": ["jonnyelwyn 'matching different cameras… manually match by eye, Premiere's tool is not perfect, use as a starting point'"]
+            },
+            {
+              "n": "배경 제거 / 모자이크·블러",
+              "p": ["썸네일 인물 오려낸 뒤 머리카락 엣지가 '바삭하게' 깨져 브러시로 가장자리 정리", "지나가는 얼굴·번호판 마스크가 원근·반사에서 이탈해 프레임마다 키프레임"],
+              "ev": ["cutout 'wisps around hair look crunchy… use the Brush to clean up'", "cotovan 'keyframe the mask path manually, moving the playhead one frame at a time — tedious'"]
+            }
+          ]
+        },
+        {
+          "title": "배포",
+          "ep": [
+            {
+              "n": "멀티 플랫폼 업로드",
+              "p": ["완성 영상을 유튜브·틱톡·릴스·X에 각각 로그인→파일 재업로드→캡션·해시태그 재입력 반복"],
+              "ev": ["socialync 'average creator loses 8-12 hours/week logging in, re-uploading, copying captions'"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
