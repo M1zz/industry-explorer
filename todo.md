@@ -27,6 +27,12 @@
 ## 데이터셋 현황 (3종 토글)
 - 🏭 산업 지도 (D_INDUSTRY) · 🔎 미세 불편 (D_MICRO) · 📐 정의된 문제 (D_DEFINED)
 
+## 정의된 문제 확장 — 완료
+- [x] 전 항목 {pain,who,when,gap} 구조화 (pStr/pBox 호환)
+- [x] 일상생활 도메인 3개 추가: 🏠 집안일·생활 · 🩹 건강·몸(일상) · 🧭 이동·돈·소통
+- [x] 총 10분야 134개 (✅해결 83 + 🔬미해결 51)
+- [x] defined-problems.json 소스 → gen_defined.py로 index.html D_DEFINED 자동생성
+
 ## 다음 단계 (선택)
 - [ ] 앱에 근거(ev: 리뷰/논문 URL) 표시 기능 추가 (현재 JSON에만 있음)
 - [ ] Reddit 원문 스레드 추가 발굴로 근거 보강 (현재 403 차단으로 미확보)
