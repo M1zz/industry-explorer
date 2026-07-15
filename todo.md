@@ -19,7 +19,15 @@
 - [x] micro-frictions.json — index.html D 스키마 호환 (ep에 ev=근거 필드 추가)
 - [x] 검증 (앱스토어 리뷰·공식 문서·커뮤니티 인용)
 
+## 앱 통합 — 완료
+- [x] micro-frictions.json을 index.html에 "🔎 미세 불편" 토글로 통합 (커밋 5c379f4)
+- [x] 정의된 문제 리서치 (7분야 102개: ✅해결 65 + 🔬미해결 37) → defined-problems.json
+- [x] "📐 정의된 문제" 토글 통합 (D_DEFINED, setDataset/updateHints/buildGraph 확장)
+
+## 데이터셋 현황 (3종 토글)
+- 🏭 산업 지도 (D_INDUSTRY) · 🔎 미세 불편 (D_MICRO) · 📐 정의된 문제 (D_DEFINED)
+
 ## 다음 단계 (선택)
-- [ ] micro-frictions.json을 index.html에 "미세불편 데이터셋" 탭/토글로 통합
+- [ ] 앱에 근거(ev: 리뷰/논문 URL) 표시 기능 추가 (현재 JSON에만 있음)
 - [ ] Reddit 원문 스레드 추가 발굴로 근거 보강 (현재 403 차단으로 미확보)
-- [ ] 도메인 추가 (금융·주거·건강관리 등)
+- [ ] 도메인/분야 추가 (금융·주거 / 화학·경제학 등)

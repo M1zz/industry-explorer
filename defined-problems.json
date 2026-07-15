@@ -1,0 +1,218 @@
+{
+  "_meta": {
+    "title": "정의된 문제 데이터셋 (Defined Problems: 해결됨 ↔ 미해결)",
+    "desc": "논문·교과서가 형식적으로 정의한 문제들. 깔끔히 해결된 문제는 실제 유효한 솔루션(알고리즘/기법/저자/연도)을 나열하고, 아직 연구 중인 문제는 정의만 둔다. index.html의 D 스키마 호환. 각 문제 = ep, sub는 ✅해결/🔬미해결로 분리. ev=출처 URL.",
+    "schema": "domain{id,icon,title,color,subs:[{title,ep:[{n:솔루션(또는 '미해결'), p:[문제명 — 정의], ev:[URL]}]}]}",
+    "status": "2026-07 기준 검증(Wikipedia·NIST·Clay·arXiv·Nature 등)",
+    "note": "P vs NP는 CS·수학 양쪽 밀레니엄 문제로 교차 등재됨."
+  },
+  "D": [
+    {
+      "id": "cs-defined", "icon": "💻", "title": "CS·알고리즘", "color": "#7c5cfc",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제",
+          "ep": [
+            {"n": "Merge sort(von Neumann,1945)·Quicksort(Hoare,1961)·Heapsort(Williams,1964)", "p": ["비교 기반 정렬 — 비교 연산만으로 n개 원소를 전순서 정렬(정보이론 하한 Ω(n log n))"], "ev": ["https://en.wikipedia.org/wiki/Sorting_algorithm"]},
+            {"n": "Dijkstra(1959)·Bellman–Ford(음수간선,1958)·A*(1968); 2025 Duan 등 정렬장벽 돌파", "p": ["단일출발 최단경로 — 가중 그래프에서 한 정점으로부터 모든 정점까지 최소가중 경로"], "ev": ["https://arxiv.org/abs/2504.17033"]},
+            {"n": "KMP(1977)·Boyer–Moore(1977)·Rabin–Karp(1987)", "p": ["정확 문자열 매칭 — 텍스트에서 패턴의 모든 출현 위치를 선형 시간에 탐색"], "ev": ["https://en.wikipedia.org/wiki/String-searching_algorithm"]},
+            {"n": "AKS(2002, 결정론적 다항시간)·Miller–Rabin(1976/80)", "p": ["소수 판정 — 정수 n이 소수인지 합성수인지 판정(인수분해 아님)"], "ev": ["https://en.wikipedia.org/wiki/AKS_primality_test"]},
+            {"n": "Gale–Shapley 지연수락 알고리즘(1962, O(n²))", "p": ["안정 매칭 — 선호순위가 주어진 두 집단에서 blocking pair 없는 완전 매칭"], "ev": ["https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm"]},
+            {"n": "Ford–Fulkerson(1956)·Dinic(1970)·push-relabel(Goldberg–Tarjan,1988); 2022 almost-linear", "p": ["최대 유량 — 용량 네트워크에서 s→t 최대 유량(최소 컷과 쌍대)"], "ev": ["https://arxiv.org/abs/2203.00671"]},
+            {"n": "Graham scan(1972)·Jarvis march(1973)·Chan(출력민감,1996)", "p": ["볼록 껍질 — 평면 n개 점을 모두 포함하는 최소 볼록 다각형"], "ev": ["https://en.wikipedia.org/wiki/Convex_hull_algorithms"]},
+            {"n": "Borůvka(1926)·Kruskal(1956)·Prim(1957); 최적 Pettie–Ramachandran(2002)", "p": ["최소 신장 트리 — 가중 무방향 그래프에서 총가중 최소로 모든 정점 연결"], "ev": ["https://en.wikipedia.org/wiki/Minimum_spanning_tree"]},
+            {"n": "Harel–Tarjan O(n)/O(1)(1984)·Bender–Farach-Colton(2000)", "p": ["LCA/RMQ — 트리 최소공통조상·배열 구간최솟값을 선형 전처리 후 상수시간 질의"], "ev": ["https://en.wikipedia.org/wiki/Lowest_common_ancestor"]},
+            {"n": "Simplex(Dantzig,1947)·ellipsoid(Khachiyan,1979)·interior-point(Karmarkar,1984)", "p": ["선형 계획법 — 선형 제약 하에서 선형 목적함수 최적화(강다항시간 존재는 미해결)"], "ev": ["https://en.wikipedia.org/wiki/Linear_programming"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["P 대 NP — 다항시간 검증 가능한 모든 문제(NP)를 다항시간에 풀 수도(P) 있는가?(Cook–Levin 1971 기반)"], "ev": ["https://en.wikipedia.org/wiki/P_versus_NP_problem"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["정수 인수분해(고전) — 합성수를 고전 컴퓨터에서 다항시간에 소인수분해할 수 있는가?(RSA 안전성 근거)"], "ev": ["https://en.wikipedia.org/wiki/Integer_factorization"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (최선: Babai 준다항시간, 2015)", "p": ["그래프 동형사상 — 두 그래프가 정점 재라벨링만으로 동일해지는지 판정(P인지 NP-완전인지 모두 미해결)"], "ev": ["https://en.wikipedia.org/wiki/Graph_isomorphism_problem"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["APSP 진성 준세제곱 — 모든 쌍 최단경로를 O(n^(3-ε))에 계산 가능한가?(세밀 복잡도 가설)"], "ev": ["https://en.wikipedia.org/wiki/Shortest_path_problem"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dist-defined", "icon": "🌐", "title": "분산시스템·네트워킹", "color": "#00b4d8",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제",
+          "ep": [
+            {"n": "Paxos(Lamport,1998)·Raft(2014)·Viewstamped Replication(1988)", "p": ["분산 합의(crash) — 노드가 중단될 수 있는 비동기망에서 모든 정상 노드가 한 값에 안전하게 동의(FLP 우회)"], "ev": ["https://raft.github.io/raft.pdf"]},
+            {"n": "PBFT(Castro–Liskov,1999)·Tendermint(2016)·HotStuff(2019)", "p": ["비잔틴 장애 허용 — 최대 f개 노드가 악의적일 때 n≥3f+1에서 일관된 복제·합의(Lamport 1982)"], "ev": ["https://pmg.csail.mit.edu/papers/osdi99.pdf"]},
+            {"n": "2PC(Gray,1978)·3PC(비차단,Skeen,1981)·Paxos Commit(2006)", "p": ["원자적 커밋 — 분산 트랜잭션 참여 노드 전부가 커밋/어보트를 원자적으로 동일 결정"], "ev": ["https://en.wikipedia.org/wiki/Two-phase_commit_protocol"]},
+            {"n": "Lamport timestamps(1978)·Vector clocks(Fidge/Mattern,1988–89)", "p": ["논리적 시계 — 전역 물리시계 없이 이벤트 인과관계(happens-before)를 포착·정렬"], "ev": ["https://lamport.azurewebsites.net/pubs/time-clocks.pdf"]},
+            {"n": "Lamport(1978)·Ricart–Agrawala(1981)·Maekawa(1985)", "p": ["분산 상호배제 — 공유메모리 없이 메시지만으로 임계구역 동시 진입 최대 1 보장"], "ev": ["https://en.wikipedia.org/wiki/Ricart%E2%80%93Agrawala_algorithm"]},
+            {"n": "Bully(Garcia-Molina,1982)·Chang–Roberts ring(1979); 실무는 Raft/Zab 내장", "p": ["리더 선출 — 프로세스 집합에서 유일 코디네이터 선출·실패 시 재선출"], "ev": ["https://en.wikipedia.org/wiki/Leader_election"]},
+            {"n": "Herlihy–Wing 형식정의(1990); 구현은 합의 기반 복제상태기계", "p": ["선형화 가능성 — 동시 객체 연산이 호출-응답 구간 내 한 시점에 원자적으로 일어난 듯 보이는 정확성 기준"], "ev": ["https://en.wikipedia.org/wiki/Linearizability"]},
+            {"n": "CRDTs(Shapiro·Preguiça·Baquero·Zawirski,2011); CAP(Brewer 2000)", "p": ["최종 일관성/무충돌 복제 — 조정 없이 동시 갱신해도 모든 복제본이 결국 동일 상태로 수렴"], "ev": ["https://hal.inria.fr/inria-00609399/document"]},
+            {"n": "Chandra–Toueg(1996, 합의 동치)·Virtual Synchrony/ISIS(Birman,1987)·Zab", "p": ["전순서 브로드캐스트 — 모든 정상 노드가 같은 메시지를 같은 순서로 전달받음(atomic broadcast)"], "ev": ["https://www.cs.cornell.edu/home/sam/FDIpapers/CT96-JACM.pdf"]},
+            {"n": "Dijkstra→OSPF/IS-IS(link-state); Bellman–Ford→RIP(distance-vector)", "p": ["최단경로 라우팅 — 네트워크 토폴로지에서 각 노드로의 최소비용 경로 계산·변화 수렴"], "ev": ["https://en.wikipedia.org/wiki/Link-state_routing_protocol"]},
+            {"n": "TCP AIMD(Jacobson,1988)·CUBIC(2008)·BBR(Google,2016)", "p": ["혼잡 제어 — 공유망에서 붕괴 없이 처리량 최대화·지연 최소화하도록 전송률 조절"], "ev": ["https://research.google/pubs/bbr-congestion-based-congestion-control/"]},
+            {"n": "NTP(Mills,1985)·Berkeley(1989)·PTP(2002)·TrueTime(Google,2012)", "p": ["물리 시계 동기화 — 분산 노드의 물리시계를 유한 불확실성 범위로 정렬"], "ev": ["https://en.wikipedia.org/wiki/Network_Time_Protocol"]},
+            {"n": "멱등성+중복제거; Kafka transactions(2017)·Flink(Chandy–Lamport 스냅샷,1985)", "p": ["정확히 한 번 처리 — 실패·재시도 있는 비신뢰망에서 각 메시지 효과를 정확히 한 번만 반영(전달 자체는 Two Generals로 불가)"], "ev": ["https://en.wikipedia.org/wiki/Two_Generals%27_Problem"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 연구 진행 중 (샤딩·롤업·ZK로 부분 완화)", "p": ["블록체인 트릴레마 — 탈중앙화·보안·확장성을 빠른 결정론적 최종성과 함께 동시 달성"], "ev": ["https://ethereum.org/en/roadmap/"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (RPKI/ROV·ASPA는 공백 존재)", "p": ["BGP 보안 — 도메인 간 라우팅에서 경로 하이재킹·위조를 전 지구 규모로 점진 배포 가능하게 방지"], "ev": ["https://www.nist.gov/programs-projects/robust-inter-domain-routing"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crypto-defined", "icon": "🔐", "title": "암호학·보안", "color": "#ff9500",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제",
+          "ep": [
+            {"n": "Diffie–Hellman(1976)·ECDH·X25519(Bernstein,2006)", "p": ["키 교환 — 도청 가능한 채널에서 처음 만난 두 당사자가 공유 비밀키에 합의"], "ev": ["https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange"]},
+            {"n": "RSA(1977)·ElGamal(1985)·ECC(Koblitz–Miller,1985)·RSA-OAEP(1994)", "p": ["공개키 암호화 — 수신자 공개키로 암호화, 대응 개인키 보유자만 복호"], "ev": ["https://en.wikipedia.org/wiki/RSA_(cryptosystem)"]},
+            {"n": "RSA·DSA(1991)·ECDSA(1992)·EdDSA/Ed25519(2011)", "p": ["디지털 서명 — 위조 불가·공개 검증 가능하며 서명자 개인키에 결속되는 서명"], "ev": ["https://en.wikipedia.org/wiki/Digital_signature"]},
+            {"n": "AES/Rijndael(Daemen–Rijmen,1998; FIPS 197,2001)", "p": ["표준 대칭키 블록암호 — 공개 명세·범용 신뢰의 대량 암호화용 블록암호"], "ev": ["https://en.wikipedia.org/wiki/Advanced_Encryption_Standard"]},
+            {"n": "HMAC(Bellare–Canetti–Krawczyk,1996)·Poly1305(2005)·KMAC", "p": ["메시지 무결성/MAC — 공유키로 변조를 탐지하고 무결성·출처를 확인"], "ev": ["https://en.wikipedia.org/wiki/HMAC"]},
+            {"n": "AES-GCM(2004)·ChaCha20-Poly1305(2008)·AES-GCM-SIV(2017)", "p": ["인증된 암호화(AEAD) — 한 키·1패스로 기밀성과 무결성/진정성을 동시 보장"], "ev": ["https://en.wikipedia.org/wiki/Authenticated_encryption"]},
+            {"n": "bcrypt(1999)·scrypt(2009)·Argon2(PHC 우승,2015)·PBKDF2(2000)", "p": ["비밀번호 저장 — DB 유출 시에도 평문 복원이 사실상 불가하도록 저장(하드웨어 크래킹 저항)"], "ev": ["https://en.wikipedia.org/wiki/Argon2"]},
+            {"n": "SHA-2(2001)·SHA-3/Keccak(2015)·BLAKE3(2020) (MD5/SHA-1 폐기)", "p": ["암호 해시 함수 — 충돌·역상·2차역상 저항의 단방향 고정길이 다이제스트"], "ev": ["https://en.wikipedia.org/wiki/SHA-3"]},
+            {"n": "ML-KEM/CRYSTALS-Kyber(NIST FIPS 203, 2024-08)·HQC(백업,2025-03)", "p": ["양자내성 키 캡슐화 — 대규모 양자컴퓨터(Shor)에도 안전한 키 확립"], "ev": ["https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption"]},
+            {"n": "ML-DSA/Dilithium(FIPS 204)·SLH-DSA/SPHINCS+(FIPS 205)·Falcon(FIPS 206 초안)", "p": ["양자내성 디지털 서명 — 양자 공격자에도 위조 불가한 서명"], "ev": ["https://www.federalregister.gov/documents/2024/08/14/2024-17956"]},
+            {"n": "zk-SNARKs(Groth16,2016·PLONK,2019)·zk-STARKs(2018,투명·PQ)·Bulletproofs(2018)", "p": ["간결 영지식 증명 — 명제의 참을 유효성 외 아무것도 노출 않고 짧게 증명·빠르게 검증(GMR 1985)"], "ev": ["https://en.wikipedia.org/wiki/Zero-knowledge_proof"]},
+            {"n": "Yao garbled circuits(1986)·GMW(1987)·BGW(1988)·SPDZ(실용,2012)", "p": ["안전한 다자간 계산(실현) — n명이 각자 비밀 입력의 함수를 결과만 노출하며 공동 계산"], "ev": ["https://en.wikipedia.org/wiki/Secure_multi-party_computation"]},
+            {"n": "Gentry(2009, ideal lattice+bootstrapping)·BGV/BFV/CKKS/TFHE; SEAL·OpenFHE", "p": ["완전 동형암호(존재성) — 복호 없이 암호문 위에서 임의 연산 수행, 암호화된 결과 산출"], "ev": ["https://en.wikipedia.org/wiki/Homomorphic_encryption"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 연구 진행 중 (평문 대비 오버헤드 수십~수백만 배)", "p": ["실용적 효율 FHE — 부트스트래핑 지연·암호문 팽창을 범용 대규모 계산에 쓸 만큼 효율화"], "ev": ["https://en.wikipedia.org/wiki/Homomorphic_encryption"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (실현성은 Jain–Lin–Sahai 2021, 효율 비현실적)", "p": ["실용적 구분불가 난독화(iO) — 기능 동일 회로의 난독화를 계산상 구분불가하게, 실사용 가능한 효율로"], "ev": ["https://dblp.org/rec/conf/stoc/JainLS21.html"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (TEE SGX/TrustZone/SEV 반복 파훼)", "p": ["부채널 저항·신뢰불가 하드웨어 안전실행 — 타이밍·전력·캐시·투기실행(Spectre/Meltdown) 누출 방어 및 관찰 가능한 하드웨어에서 기밀·무결성 보장"], "ev": ["https://en.wikipedia.org/wiki/Side-channel_attack"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (실현성 Kushilevitz–Ostrovsky 1997)", "p": ["효율적 단일서버 PIR — 서버가 어떤 항목을 읽는지 모르게 검색하되 실배포 가능한 저지연으로"], "ev": ["https://en.wikipedia.org/wiki/Private_information_retrieval"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math-defined", "icon": "➗", "title": "수학", "color": "#5856d6",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제",
+          "ep": [
+            {"n": "Andrew Wiles(1994–95, 모듈러성 정리)", "p": ["페르마의 마지막 정리 — n>2에서 aⁿ+bⁿ=cⁿ의 양의 정수해는 없다"], "ev": ["https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem"]},
+            {"n": "Grigori Perelman(2002–03, Ricci flow+surgery); 밀레니엄 유일 해결", "p": ["푸앵카레 추측 — 모든 단순연결 닫힌 3-다양체는 3-구면 S³와 위상동형"], "ev": ["https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture"]},
+            {"n": "Appel–Haken(1976, 최초 주요 컴퓨터 보조 증명)", "p": ["4색 정리 — 임의의 평면 지도는 인접 영역이 다르게 4색으로 칠할 수 있다"], "ev": ["https://en.wikipedia.org/wiki/Four_color_theorem"]},
+            {"n": "Thomas Hales(1998; Flyspeck 형식검증 2014–17)", "p": ["케플러 추측 — 3차원 동일 구 쌓기 최대 밀도는 π/√18≈0.7405(면심입방/육방밀집)"], "ev": ["https://en.wikipedia.org/wiki/Kepler_conjecture"]},
+            {"n": "집단적 성과(1955–2004; 마지막 간극 Aschbacher–Smith 2004)", "p": ["유한 단순군 분류 — 모든 유한 단순군을 순환군·교대군·리 타입 16계열·26 산재군으로 완전 분류"], "ev": ["https://en.wikipedia.org/wiki/Classification_of_finite_simple_groups"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 밀레니엄 문제", "p": ["리만 가설 — 제타함수 ζ(s)의 모든 비자명 영점의 실수부는 1/2"], "ev": ["https://en.wikipedia.org/wiki/Riemann_hypothesis"]},
+            {"n": "🔬 미해결 · 밀레니엄 문제", "p": ["P 대 NP — 다항시간 검증 가능=다항시간 풀이 가능인가?(P=NP?)"], "ev": ["https://en.wikipedia.org/wiki/P_versus_NP_problem"]},
+            {"n": "🔬 미해결 · 밀레니엄 문제", "p": ["버치–스위너턴다이어 — 타원곡선 유리점 군의 계수 = L(E,s)의 s=1 영점 위수"], "ev": ["https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture"]},
+            {"n": "🔬 미해결 · 밀레니엄 문제", "p": ["호지 추측 — 비특이 복소사영다양체의 모든 호지 클래스는 대수적 사이클의 유리결합"], "ev": ["https://en.wikipedia.org/wiki/Hodge_conjecture"]},
+            {"n": "🔬 미해결 · 밀레니엄 문제", "p": ["나비에–스토크스 존재성·매끄러움 — 3D에서 매끄러운 초기조건의 전역 매끄러운 유한에너지 해 존재 여부"], "ev": ["https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness"]},
+            {"n": "🔬 미해결 · 밀레니엄 문제", "p": ["양–밀스 질량간극 — ℝ⁴ 양자 양–밀스 이론의 엄밀 존재성과 양(+)의 질량간극 증명"], "ev": ["https://en.wikipedia.org/wiki/Yang%E2%80%93Mills_existence_and_mass_gap"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (4×10¹⁸까지 확인)", "p": ["골드바흐 추측 — 2보다 큰 모든 짝수는 두 소수의 합"], "ev": ["https://en.wikipedia.org/wiki/Goldbach%27s_conjecture"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (Zhang 2013 유계 간극 진전)", "p": ["쌍둥이 소수 추측 — p와 p+2가 모두 소수인 쌍이 무한히 많다"], "ev": ["https://en.wikipedia.org/wiki/Twin_prime"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["콜라츠 추측 — 짝수면 n/2, 홀수면 3n+1 반복 시 항상 1에 도달"], "ev": ["https://en.wikipedia.org/wiki/Collatz_conjecture"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-defined", "icon": "🧠", "title": "AI·머신러닝", "color": "#ff2d55",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제 (벤치마크 초인간/포화)",
+          "ep": [
+            {"n": "AlexNet(2012)→PReLU-Net·ResNet(He,2015, top-5 3.57%, 초인간)", "p": ["ImageNet 이미지 분류 — 1,000 클래스 이미지를 분류하고 top-5 오류율 최소화"], "ev": ["https://arxiv.org/abs/1502.01852"]},
+            {"n": "LeNet-5(LeCun,1998); 이후 CNN 99.7%+ 포화", "p": ["필기 숫자 인식(MNIST) — 28×28 손글씨 숫자 0–9 분류"], "ev": ["http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf"]},
+            {"n": "DeepFace(2014)·FaceNet(2015)·GaussianFace(LFW 인간 초과,2015)", "p": ["얼굴 인식/검증 — 두 얼굴이 동일 인물인지 판별·신원 식별"], "ev": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC8721510/"]},
+            {"n": "AlphaGo(2016, 이세돌 격파)·AlphaGo Zero(2017)·AlphaZero(2017)", "p": ["완전정보 보드게임(바둑·체스·쇼기) — 초인간 수준 플레이 학습"], "ev": ["https://arxiv.org/abs/1712.01815"]},
+            {"n": "DQN(Mnih,2015,Nature)·Rainbow·Agent57·MuZero", "p": ["Atari 심층 강화학습 — 픽셀 입력만으로 게임군을 인간 수준 플레이"], "ev": ["https://www.nature.com/articles/nature14236"]},
+            {"n": "AlphaFold2(Jumper,2021, CASP14 GDT_TS 92.4, 실험 수준)", "p": ["단백질 구조 예측 — 아미노산 서열로 3D 접힘 구조 예측"], "ev": ["https://www.nature.com/articles/s41586-021-03819-2"]},
+            {"n": "Deep Speech(2014)·Whisper(2022, 다국어 near-human zero-shot)", "p": ["음성 인식 — 음성을 텍스트로 전사, 단어오류율(WER) 최소화"], "ev": ["https://cdn.openai.com/papers/whisper.pdf"]},
+            {"n": "Seq2Seq+Attention(2015)·Transformer(Vaswani,2017); 고자원 언어쌍 near-human", "p": ["기계 번역 — 한 자연어 문장을 다른 언어로 번역(저자원 언어는 여전히 과제)"], "ev": ["https://arxiv.org/abs/1706.03762"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 연구 진행 중 (내재적 성질이란 주장도)", "p": ["LLM 환각/사실성 — 그럴듯하나 틀린 생성을 막고 불확실할 때 절제하도록"], "ev": ["https://arxiv.org/pdf/2511.12869"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (안정성-가소성 딜레마)", "p": ["지속 학습/파국적 망각 — 이전 과제를 잊지 않고 새 과제를 순차 학습"], "ev": ["https://arxiv.org/pdf/2404.00781"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["관측데이터 인과 추론 — 무작위 실험 없이 관측만으로 인과구조·개입효과를 신뢰성 있게 식별"], "ev": ["https://arxiv.org/abs/2206.15475"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (인간 대비 수백~수천배 경험 요구)", "p": ["표본 효율 강화학습 — 소수 상호작용만으로 복잡한 제어 정책 학습"], "ev": ["https://arxiv.org/abs/1907.02057"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["기계적 해석가능성/정렬 — 대규모 신경망 내부를 인간이 검증 가능한 회로로 역설계하고 의도에 정렬"], "ev": ["https://transformer-circuits.pub/2023/monosemantic-features"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["범용 체화 조작 — 로봇이 비정형 환경에서 다양한 물체를 일반화해 조작·장기 과제 수행"], "ev": ["https://arxiv.org/abs/2307.15818"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bio-defined", "icon": "🧬", "title": "생명과학·의학", "color": "#4cd964",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제",
+          "ep": [
+            {"n": "Sanger sequencing(1977)·NGS/Illumina(2000년대); 인간 게놈 수백 달러", "p": ["게놈 읽기(DNA 시퀀싱) — DNA 염기서열을 정확히 판독"], "ev": ["https://en.wikipedia.org/wiki/DNA_sequencing"]},
+            {"n": "PCR(Kary Mullis,1983; 1993 노벨화학상)", "p": ["DNA 증폭 — 미량 특정 DNA를 검출 가능한 수준으로 대량 복제"], "ev": ["https://en.wikipedia.org/wiki/Polymerase_chain_reaction"]},
+            {"n": "CRISPR-Cas9(Doudna–Charpentier,2012; 2020 노벨화학상)", "p": ["정밀 유전자 편집 — 살아있는 세포 게놈의 원하는 위치를 표적 절단·수정"], "ev": ["https://en.wikipedia.org/wiki/CRISPR"]},
+            {"n": "AlphaFold2(2020; 2024 노벨화학상)·X선 결정학·cryo-EM", "p": ["단백질 3차 구조 결정 — 아미노산 서열로 3D 접힘 구조 규명"], "ev": ["https://www.nobelprize.org/prizes/chemistry/2024/press-release/"]},
+            {"n": "직접작용 항바이러스제(DAAs) sofosbuvir 등(2013~); 완치율 95–99%", "p": ["C형 간염 완치 — 만성 HCV 감염을 완전 제거"], "ev": ["https://pubmed.ncbi.nlm.nih.gov/29427484/"]},
+            {"n": "백신 세계 접종 캠페인(Jenner 1796 기원); 1980 WHO 박멸 선언", "p": ["천연두 박멸 — variola 감염병을 전 지구적으로 근절"], "ev": ["https://en.wikipedia.org/wiki/Smallpox"]},
+            {"n": "재조합 DNA 인간 인슐린 Humulin(1978 합성/1982 승인)", "p": ["인간 인슐린 생산 — 치료용 인간 인슐린을 대량·안정 공급(동물 췌장 탈피)"], "ev": ["https://en.wikipedia.org/wiki/Insulin_(medication)"]},
+            {"n": "CRISPR 세포치료 Casgevy(exa-cel; Vertex/CRISPR Tx, FDA 2023-12)", "p": ["겸상적혈구병 완치 — HBB 유전자 원인을 교정하는 기능적 완치"], "ev": ["https://www.fda.gov/news-events/press-announcements/fda-approves-first-cell-based-therapies-treatment-sickle-cell-disease"]},
+            {"n": "고활성 항레트로바이러스 요법 HAART/cART(1996); U=U (완전완치는 아님)", "p": ["HIV/AIDS 만성질환화 — 치명적 감염을 억제해 정상 수명의 만성질환으로 전환"], "ev": ["https://en.wikipedia.org/wiki/Management_of_HIV/AIDS"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 연구 진행 중 (lecanemab·donanemab은 ~27–30% 지연, 완치 아님)", "p": ["알츠하이머 근본 치료 — 신경변성 진행을 멈추거나 되돌리는 질병 완치"], "ev": ["https://www.hebrewseniorlife.org/blog/what-you-should-know-about-lecanemab-and-donanemab-alzheimers-disease"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (암 사망 주요 원인)", "p": ["고형암 전이 정복 — 원발 부위를 벗어나 전신 확산하는 전이를 차단·치료"], "ev": ["https://en.wikipedia.org/wiki/Metastasis"]},
+            {"n": "🔬 미해결 · 연구 진행 중", "p": ["노화/세포노쇠 역전 — 생물학적 노화를 늦추거나 되돌려 건강수명 연장"], "ev": ["https://en.wikipedia.org/wiki/Senescence"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (BPL-1357·mRNA-1010 임상, 승인 없음)", "p": ["범용 독감 백신 — 매년 변이하는 모든 아형에 광범위·지속 방어하는 단일 백신"], "ev": ["https://ivr.cidrap.umn.edu/universal-influenza-vaccine-technology-landscape"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (포유류 CNS 자발 재생 거의 불가)", "p": ["중추신경·척수 재생 — 손상된 CNS 축삭을 재생시켜 운동·감각 기능 회복"], "ev": ["https://en.wikipedia.org/wiki/Neuroregeneration"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phys-defined", "icon": "⚛️", "title": "물리·공학", "color": "#ffcc02",
+      "subs": [
+        {
+          "title": "✅ 해결된 문제",
+          "ep": [
+            {"n": "해상 크로노미터 H4 — John Harrison(1761, 81일 항해 오차 ~5초)", "p": ["해상 경도 결정 — 움직이는 배에서 정확한 기준시각을 유지해 동서 위치(경도) 측정"], "ev": ["https://en.wikipedia.org/wiki/Marine_chronometer"]},
+            {"n": "Wright Flyer — Wright 형제(1903, 3축 제어)", "p": ["제어된 동력 비행 — 공기보다 무거운 기계의 지속·제어 가능한 유인 동력 비행"], "ev": ["https://en.wikipedia.org/wiki/Wright_Flyer"]},
+            {"n": "Shannon 용량정리(1948)+Hamming(1950)·Reed–Solomon(1960)·Turbo(1993)·LDPC(1962)", "p": ["잡음 채널 신뢰 통신 — 잡음 채널에서 임의로 작은 오류로 정보를 전송하는 최대 속도와 방법"], "ev": ["https://arxiv.org/pdf/cs/0611112"]},
+            {"n": "GPS — 美 국방부(1978/1995 완전운용, 상대성 보정)", "p": ["전지구 절대 위치측정 — 위성 신호로 지구 어디서나 정밀 위치·시각(상대성 효과 보정 필요)"], "ev": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC5253894/"]},
+            {"n": "LIGO(2015, GW150914 이중블랙홀 병합; 2017 노벨상)", "p": ["중력파 직접 검출 — 일반상대론이 예측한 시공간 잔물결(변형률 ~10⁻²¹)을 직접 관측"], "ev": ["https://en.wikipedia.org/wiki/First_observation_of_gravitational_waves"]},
+            {"n": "ATLAS·CMS @ CERN LHC(2012-07, ~125 GeV; 2013 노벨상)", "p": ["힉스 보손 검출 — Brout–Englert–Higgs 메커니즘(1964)의 스칼라 보손을 실험적으로 확인"], "ev": ["https://en.wikipedia.org/wiki/Higgs_boson"]},
+            {"n": "GaN/InGaN 청색 LED — Akasaki–Amano(p형 GaN,1989)·Nakamura(1993; 2014 노벨상)", "p": ["고휘도 청색 발광 — 백색 고체조명에 필요한 밝고 효율적인 청색 LED(고품질 p형 GaN 난제)"], "ev": ["https://en.wikipedia.org/wiki/Shuji_Nakamura"]}
+          ]
+        },
+        {
+          "title": "🔬 미해결 난제",
+          "ep": [
+            {"n": "🔬 미해결 · 연구 진행 중 (LK-99 2023 반증)", "p": ["상온·상압 초전도 — ~300K 대기압에서 저항 0·완전 반자성을 보이는 물질"], "ev": ["https://en.wikipedia.org/wiki/LK-99"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (NIF 점화 2022이나 그리드 net은 아님)", "p": ["그리드 규모 순에너지 핵융합 — 발전소 총출력이 총투입을 넘어 전력망에 순에너지 공급"], "ev": ["https://en.wikipedia.org/wiki/National_Ignition_Facility"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (끈이론·루프양자중력 미완)", "p": ["양자 중력 — 일반상대론의 곡률 시공간과 양자역학을 조화시키는 일관된 중력 양자이론"], "ev": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC5567241/"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (단기 저장은 리튬이온·양수발전)", "p": ["대용량 장기 에너지 저장 — 그리드 규모로 고밀도·장주기(다일/계절)·저비용·장수명 저장"], "ev": ["https://en.wikipedia.org/wiki/Grid_energy_storage"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (k–ε·k–ω·ML은 근사)", "p": ["난류 닫힘 문제 — RANS 평균화 시 생기는 레이놀즈 응력 미지항의 제1원리 일반 닫힘"], "ev": ["https://www.cambridge.org/core/journals/journal-of-fluid-mechanics"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (DESI 2024–25는 시변 암흑에너지 시사)", "p": ["암흑물질·암흑에너지 정체 — 중력으로만 추정되는 우주 에너지 ~95%(암흑물질 27%·암흑에너지 68%)의 물리적 정체"], "ev": ["https://www.sciencedaily.com/news/space_time/dark_matter/"]},
+            {"n": "🔬 미해결 · 연구 진행 중 (Google 임계이하 2024–25 등 이정표)", "p": ["내결함성 확장형 양자컴퓨팅 — 노이즈 물리 큐비트를 논리 큐비트로 부호화해 수백만 규모로 신뢰성 있게 확장"], "ev": ["https://www.riverlane.com/blog/quantum-error-correction-our-2025-trends-and-2026-predictions"]}
+          ]
+        }
+      ]
+    }
+  ]
+}

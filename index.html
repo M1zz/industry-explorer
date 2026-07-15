@@ -145,6 +145,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <div class="ds-tabs">
     <button class="ds-tab active" data-ds="industry" onclick="setDataset('industry')">🏭 산업 지도</button>
     <button class="ds-tab" data-ds="micro" onclick="setDataset('micro')">🔎 미세 불편</button>
+    <button class="ds-tab" data-ds="defined" onclick="setDataset('defined')">📐 정의된 문제</button>
   </div>
 </div>
 
@@ -726,6 +727,154 @@ const D_MICRO=[
 ]}
 ];
 
+// ══════════ DEFINED-PROBLEM DATA (논문·교과서가 정의한 문제 · ✅해결=실제 솔루션 / 🔬미해결=정의만 · 2026-07 검증) ══════════
+const D_DEFINED=[
+{id:"cs-defined",icon:"💻",title:"CS·알고리즘",color:"#7c5cfc",subs:[
+{title:"✅ 해결된 문제",ep:[
+{n:"Merge sort(1945)·Quicksort(Hoare,1961)·Heapsort(1964)",p:["비교 기반 정렬 — 비교 연산만으로 n개 원소를 전순서 정렬(하한 Ω(n log n))"]},
+{n:"Dijkstra(1959)·Bellman–Ford(음수,1958)·A*(1968); 2025 정렬장벽 돌파",p:["단일출발 최단경로 — 가중 그래프에서 한 정점→모든 정점 최소가중 경로"]},
+{n:"KMP(1977)·Boyer–Moore(1977)·Rabin–Karp(1987)",p:["정확 문자열 매칭 — 텍스트에서 패턴의 모든 출현을 선형 시간에 탐색"]},
+{n:"AKS(2002, 결정론적 다항시간)·Miller–Rabin",p:["소수 판정 — 정수 n이 소수인지 합성수인지 판정(인수분해 아님)"]},
+{n:"Gale–Shapley 지연수락(1962)",p:["안정 매칭 — 선호순위 두 집단에서 blocking pair 없는 완전 매칭"]},
+{n:"Ford–Fulkerson(1956)·Dinic·push-relabel(1988); 2022 almost-linear",p:["최대 유량 — 용량 네트워크에서 s→t 최대 유량(최소 컷과 쌍대)"]},
+{n:"Graham scan(1972)·Chan(출력민감,1996)",p:["볼록 껍질 — 평면 n개 점을 포함하는 최소 볼록 다각형"]},
+{n:"Borůvka(1926)·Kruskal(1956)·Prim(1957)",p:["최소 신장 트리 — 가중 무방향 그래프를 총가중 최소로 연결"]},
+{n:"Harel–Tarjan O(n)/O(1)(1984)·Bender–Farach-Colton",p:["LCA/RMQ — 트리 최소공통조상·구간최솟값을 선형 전처리 후 상수시간 질의"]},
+{n:"Simplex(Dantzig,1947)·ellipsoid(1979)·interior-point(Karmarkar,1984)",p:["선형 계획법 — 선형 제약 하 선형 목적함수 최적화"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · 연구 진행 중",p:["P 대 NP — 다항시간 검증 가능한 모든 문제(NP)를 다항시간에 풀 수도(P) 있는가?"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["정수 인수분해(고전) — 고전 컴퓨터에서 다항시간 소인수분해 가능?(RSA 근거)"]},
+{n:"🔬 미해결 · 최선 Babai 준다항(2015)",p:["그래프 동형사상 — 두 그래프가 정점 재라벨링만으로 동일해지는지 판정"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["APSP 진성 준세제곱 — 모든 쌍 최단경로를 O(n^(3-ε))에 계산 가능?"]}
+]}
+]},
+{id:"dist-defined",icon:"🌐",title:"분산시스템·네트워킹",color:"#00b4d8",subs:[
+{title:"✅ 해결된 문제",ep:[
+{n:"Paxos(Lamport,1998)·Raft(2014)·VR(1988)",p:["분산 합의(crash) — 비동기망에서 노드 중단에도 모든 정상 노드가 한 값에 안전 동의"]},
+{n:"PBFT(Castro–Liskov,1999)·Tendermint·HotStuff(2019)",p:["비잔틴 장애 허용 — 최대 f개 악의적 노드에도 n≥3f+1에서 일관 합의(Lamport 1982)"]},
+{n:"2PC(Gray,1978)·3PC(비차단,1981)·Paxos Commit",p:["원자적 커밋 — 분산 트랜잭션 참여 노드 전부가 커밋/어보트를 원자적 동일 결정"]},
+{n:"Lamport timestamps(1978)·Vector clocks(1988–89)",p:["논리적 시계 — 전역 물리시계 없이 인과관계(happens-before) 포착·정렬"]},
+{n:"Lamport(1978)·Ricart–Agrawala(1981)·Maekawa",p:["분산 상호배제 — 메시지만으로 임계구역 동시 진입 최대 1 보장"]},
+{n:"Bully(1982)·Chang–Roberts(1979); 실무 Raft/Zab",p:["리더 선출 — 유일 코디네이터 선출·실패 시 재선출"]},
+{n:"Herlihy–Wing 형식정의(1990)",p:["선형화 가능성 — 동시 연산이 호출-응답 구간 내 한 시점에 원자적으로 일어난 듯 보이는 정확성 기준"]},
+{n:"CRDTs(Shapiro 등,2011); CAP(Brewer 2000)",p:["최종 일관성/무충돌 복제 — 조정 없이 동시 갱신해도 모든 복제본이 결국 수렴"]},
+{n:"Chandra–Toueg(1996)·Virtual Synchrony(Birman,1987)·Zab",p:["전순서 브로드캐스트 — 모든 정상 노드가 같은 메시지를 같은 순서로 전달"]},
+{n:"Dijkstra→OSPF/IS-IS; Bellman–Ford→RIP",p:["최단경로 라우팅 — 토폴로지에서 최소비용 경로 계산·변화 수렴"]},
+{n:"TCP AIMD(Jacobson,1988)·CUBIC·BBR(Google,2016)",p:["혼잡 제어 — 공유망에서 붕괴 없이 처리량 최대·지연 최소로 전송률 조절"]},
+{n:"NTP(Mills,1985)·PTP(2002)·TrueTime(Google,2012)",p:["물리 시계 동기화 — 분산 노드 물리시계를 유한 불확실성 범위로 정렬"]},
+{n:"멱등성+dedup; Kafka tx(2017)·Flink(Chandy–Lamport,1985)",p:["정확히 한 번 처리 — 재시도 있는 비신뢰망에서 각 메시지 효과를 한 번만 반영(전달 자체는 Two Generals로 불가)"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · 샤딩·롤업·ZK 부분 완화",p:["블록체인 트릴레마 — 탈중앙화·보안·확장성을 빠른 결정론적 최종성과 동시 달성"]},
+{n:"🔬 미해결 · RPKI/ROV·ASPA 공백",p:["BGP 보안 — 도메인 간 경로 하이재킹·위조를 전 지구 규모로 점진 배포 가능하게 방지"]}
+]}
+]},
+{id:"crypto-defined",icon:"🔐",title:"암호학·보안",color:"#ff9500",subs:[
+{title:"✅ 해결된 문제",ep:[
+{n:"Diffie–Hellman(1976)·ECDH·X25519",p:["키 교환 — 도청 가능한 채널에서 처음 만난 두 당사자가 공유 비밀키 합의"]},
+{n:"RSA(1977)·ElGamal·ECC(1985)·RSA-OAEP",p:["공개키 암호화 — 수신자 공개키로 암호화, 대응 개인키 보유자만 복호"]},
+{n:"RSA·DSA(1991)·ECDSA(1992)·EdDSA/Ed25519(2011)",p:["디지털 서명 — 위조 불가·공개 검증 가능하며 개인키에 결속되는 서명"]},
+{n:"AES/Rijndael(Daemen–Rijmen; FIPS 197,2001)",p:["표준 대칭키 블록암호 — 공개 명세·범용 신뢰의 대량 암호화용 블록암호"]},
+{n:"HMAC(1996)·Poly1305(2005)·KMAC",p:["메시지 무결성/MAC — 공유키로 변조 탐지, 무결성·출처 확인"]},
+{n:"AES-GCM(2004)·ChaCha20-Poly1305(2008)",p:["인증된 암호화(AEAD) — 한 키·1패스로 기밀성과 무결성 동시 보장"]},
+{n:"bcrypt(1999)·scrypt(2009)·Argon2(2015)·PBKDF2",p:["비밀번호 저장 — DB 유출에도 평문 복원 불가하도록 저장(HW 크래킹 저항)"]},
+{n:"SHA-2(2001)·SHA-3/Keccak(2015)·BLAKE3 (MD5/SHA-1 폐기)",p:["암호 해시 — 충돌·역상·2차역상 저항의 단방향 고정길이 다이제스트"]},
+{n:"ML-KEM/Kyber(NIST FIPS 203, 2024)·HQC(2025)",p:["양자내성 키 캡슐화 — 대규모 양자컴퓨터(Shor)에도 안전한 키 확립"]},
+{n:"ML-DSA/Dilithium(FIPS 204)·SLH-DSA/SPHINCS+(FIPS 205)",p:["양자내성 디지털 서명 — 양자 공격자에도 위조 불가한 서명"]},
+{n:"zk-SNARKs(Groth16,2016·PLONK)·zk-STARKs(2018)",p:["간결 영지식 증명 — 유효성 외 아무것도 노출 않고 짧게 증명·빠르게 검증(GMR 1985)"]},
+{n:"Yao garbled circuits(1986)·GMW·BGW·SPDZ(2012)",p:["안전한 다자간 계산(실현) — n명이 비밀 입력의 함수를 결과만 노출하며 공동 계산"]},
+{n:"Gentry(2009, bootstrapping)·BGV/BFV/CKKS/TFHE",p:["완전 동형암호(존재성) — 복호 없이 암호문 위에서 임의 연산 수행"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · 오버헤드 수십~수백만 배",p:["실용적 효율 FHE — 부트스트래핑 지연·암호문 팽창을 범용 대규모 계산에 쓸 만큼 효율화"]},
+{n:"🔬 미해결 · 실현성만(JLS 2021)",p:["실용적 구분불가 난독화(iO) — 기능 동일 회로 난독화를 계산상 구분불가하게, 실사용 효율로"]},
+{n:"🔬 미해결 · TEE 반복 파훼",p:["부채널 저항·신뢰불가 HW 안전실행 — 타이밍·전력·투기실행(Spectre) 누출 방어"]},
+{n:"🔬 미해결 · 실현성만(1997)",p:["효율적 단일서버 PIR — 어떤 항목 읽는지 모르게 검색하되 저지연 실배포 가능하게"]}
+]}
+]},
+{id:"math-defined",icon:"➗",title:"수학",color:"#5856d6",subs:[
+{title:"✅ 해결된 문제",ep:[
+{n:"Andrew Wiles(1994–95, 모듈러성 정리)",p:["페르마의 마지막 정리 — n>2에서 aⁿ+bⁿ=cⁿ의 양의 정수해는 없다"]},
+{n:"Grigori Perelman(2002–03, Ricci flow); 밀레니엄 유일 해결",p:["푸앵카레 추측 — 모든 단순연결 닫힌 3-다양체는 3-구면 S³와 위상동형"]},
+{n:"Appel–Haken(1976, 최초 컴퓨터 보조 증명)",p:["4색 정리 — 임의의 평면 지도는 인접 영역이 다르게 4색으로 칠할 수 있다"]},
+{n:"Thomas Hales(1998; Flyspeck 2014–17)",p:["케플러 추측 — 3D 동일 구 쌓기 최대 밀도는 π/√18≈0.7405"]},
+{n:"집단적 성과(1955–2004; Aschbacher–Smith)",p:["유한 단순군 분류 — 순환군·교대군·리 타입 16계열·26 산재군으로 완전 분류"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · 밀레니엄 문제",p:["리만 가설 — 제타함수 ζ(s)의 모든 비자명 영점의 실수부는 1/2"]},
+{n:"🔬 미해결 · 밀레니엄 문제",p:["P 대 NP — 다항시간 검증=다항시간 풀이인가?(P=NP?)"]},
+{n:"🔬 미해결 · 밀레니엄 문제",p:["버치–스위너턴다이어 — 타원곡선 유리점 계수 = L(E,s)의 s=1 영점 위수"]},
+{n:"🔬 미해결 · 밀레니엄 문제",p:["호지 추측 — 비특이 복소사영다양체의 호지 클래스는 대수적 사이클의 유리결합"]},
+{n:"🔬 미해결 · 밀레니엄 문제",p:["나비에–스토크스 존재성·매끄러움 — 3D 매끄러운 초기조건의 전역 매끄러운 해 존재 여부"]},
+{n:"🔬 미해결 · 밀레니엄 문제",p:["양–밀스 질량간극 — ℝ⁴ 양자 양–밀스 이론의 엄밀 존재성과 양의 질량간극 증명"]},
+{n:"🔬 미해결 · 4×10¹⁸까지 확인",p:["골드바흐 추측 — 2보다 큰 모든 짝수는 두 소수의 합"]},
+{n:"🔬 미해결 · Zhang 2013 진전",p:["쌍둥이 소수 추측 — p와 p+2가 모두 소수인 쌍이 무한히 많다"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["콜라츠 추측 — 짝수면 n/2, 홀수면 3n+1 반복 시 항상 1에 도달"]}
+]}
+]},
+{id:"ai-defined",icon:"🧠",title:"AI·머신러닝",color:"#ff2d55",subs:[
+{title:"✅ 해결된 문제 (벤치마크 초인간/포화)",ep:[
+{n:"AlexNet(2012)→ResNet(He,2015, top-5 3.57%, 초인간)",p:["ImageNet 이미지 분류 — 1,000 클래스 이미지 분류, top-5 오류율 최소화"]},
+{n:"LeNet-5(LeCun,1998); CNN 99.7%+ 포화",p:["필기 숫자 인식(MNIST) — 28×28 손글씨 숫자 0–9 분류"]},
+{n:"DeepFace(2014)·FaceNet(2015)·GaussianFace(인간 초과)",p:["얼굴 인식/검증 — 두 얼굴이 동일 인물인지 판별·신원 식별"]},
+{n:"AlphaGo(2016)·AlphaGo Zero(2017)·AlphaZero",p:["완전정보 보드게임(바둑·체스·쇼기) — 초인간 수준 플레이 학습"]},
+{n:"DQN(Mnih,2015,Nature)·Agent57·MuZero",p:["Atari 심층 강화학습 — 픽셀 입력만으로 게임군을 인간 수준 플레이"]},
+{n:"AlphaFold2(Jumper,2021, CASP14 GDT 92.4)",p:["단백질 구조 예측 — 아미노산 서열로 3D 접힘 구조 예측"]},
+{n:"Deep Speech(2014)·Whisper(2022, near-human)",p:["음성 인식 — 음성을 텍스트로 전사, 단어오류율(WER) 최소화"]},
+{n:"Seq2Seq+Attention·Transformer(Vaswani,2017)",p:["기계 번역 — 문장을 다른 언어로 번역(고자원 언어쌍 near-human; 저자원은 과제)"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · 내재적 성질이란 주장도",p:["LLM 환각/사실성 — 그럴듯하나 틀린 생성을 막고 불확실할 때 절제하도록"]},
+{n:"🔬 미해결 · 안정성-가소성 딜레마",p:["지속 학습/파국적 망각 — 이전 과제를 잊지 않고 새 과제를 순차 학습"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["관측데이터 인과 추론 — 무작위 실험 없이 관측만으로 인과구조·개입효과 식별"]},
+{n:"🔬 미해결 · 인간 대비 수백~수천배 경험",p:["표본 효율 강화학습 — 소수 상호작용만으로 복잡한 제어 정책 학습"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["기계적 해석가능성/정렬 — 신경망 내부를 검증 가능한 회로로 역설계·의도에 정렬"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["범용 체화 조작 — 로봇이 비정형 환경에서 다양한 물체를 일반화해 조작·장기 과제"]}
+]}
+]},
+{id:"bio-defined",icon:"🧬",title:"생명과학·의학",color:"#4cd964",subs:[
+{title:"✅ 해결된 문제",ep:[
+{n:"Sanger sequencing(1977)·NGS/Illumina",p:["게놈 읽기(DNA 시퀀싱) — DNA 염기서열을 정확히 판독"]},
+{n:"PCR(Kary Mullis,1983; 1993 노벨상)",p:["DNA 증폭 — 미량 특정 DNA를 검출 가능 수준으로 대량 복제"]},
+{n:"CRISPR-Cas9(Doudna–Charpentier,2012; 2020 노벨상)",p:["정밀 유전자 편집 — 세포 게놈의 원하는 위치를 표적 절단·수정"]},
+{n:"AlphaFold2(2020; 2024 노벨상)·X선·cryo-EM",p:["단백질 3차 구조 결정 — 아미노산 서열로 3D 접힘 구조 규명"]},
+{n:"DAAs sofosbuvir 등(2013~); 완치율 95–99%",p:["C형 간염 완치 — 만성 HCV 감염을 완전 제거"]},
+{n:"백신 세계 접종 캠페인; 1980 WHO 박멸 선언",p:["천연두 박멸 — variola 감염병을 전 지구적으로 근절"]},
+{n:"재조합 DNA 인슐린 Humulin(1978/1982)",p:["인간 인슐린 생산 — 치료용 인간 인슐린을 대량·안정 공급(동물 췌장 탈피)"]},
+{n:"CRISPR 세포치료 Casgevy(FDA 2023-12)",p:["겸상적혈구병 완치 — HBB 유전자 원인을 교정하는 기능적 완치"]},
+{n:"HAART/cART(1996); U=U (완전완치는 아님)",p:["HIV/AIDS 만성질환화 — 치명적 감염을 억제해 만성질환으로 전환"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · lecanemab 등은 지연일 뿐",p:["알츠하이머 근본 치료 — 신경변성 진행을 멈추거나 되돌리는 질병 완치"]},
+{n:"🔬 미해결 · 암 사망 주요 원인",p:["고형암 전이 정복 — 원발 부위를 벗어난 전신 전이를 차단·치료"]},
+{n:"🔬 미해결 · 연구 진행 중",p:["노화/세포노쇠 역전 — 생물학적 노화를 늦추거나 되돌려 건강수명 연장"]},
+{n:"🔬 미해결 · 승인 백신 없음",p:["범용 독감 백신 — 모든 변이 아형에 광범위·지속 방어하는 단일 백신"]},
+{n:"🔬 미해결 · 포유류 CNS 자발 재생 불가",p:["중추신경·척수 재생 — 손상된 CNS 축삭을 재생시켜 운동·감각 회복"]}
+]}
+]},
+{id:"phys-defined",icon:"⚛️",title:"물리·공학",color:"#ffcc02",subs:[
+{title:"✅ 해결된 문제",ep:[
+{n:"해상 크로노미터 H4 — John Harrison(1761)",p:["해상 경도 결정 — 움직이는 배에서 기준시각을 유지해 동서 위치(경도) 측정"]},
+{n:"Wright Flyer — Wright 형제(1903, 3축 제어)",p:["제어된 동력 비행 — 공기보다 무거운 기계의 지속·제어 가능한 유인 동력 비행"]},
+{n:"Shannon 용량정리(1948)+Reed–Solomon(1960)·LDPC·Turbo",p:["잡음 채널 신뢰 통신 — 잡음 채널에서 임의로 작은 오류로 정보를 전송하는 최대 속도·방법"]},
+{n:"GPS — 美 국방부(1978/1995, 상대성 보정)",p:["전지구 절대 위치측정 — 위성 신호로 어디서나 정밀 위치·시각(상대성 보정 필요)"]},
+{n:"LIGO(2015, GW150914; 2017 노벨상)",p:["중력파 직접 검출 — 시공간 잔물결(변형률 ~10⁻²¹)을 직접 관측"]},
+{n:"ATLAS·CMS @ CERN LHC(2012; 2013 노벨상)",p:["힉스 보손 검출 — BEH 메커니즘(1964)의 스칼라 보손을 실험적으로 확인"]},
+{n:"GaN/InGaN 청색 LED — Akasaki·Amano·Nakamura(2014 노벨상)",p:["고휘도 청색 발광 — 백색 고체조명에 필요한 밝고 효율적인 청색 LED"]}
+]},
+{title:"🔬 미해결 난제",ep:[
+{n:"🔬 미해결 · LK-99(2023) 반증",p:["상온·상압 초전도 — ~300K 대기압에서 저항 0·완전 반자성 물질"]},
+{n:"🔬 미해결 · NIF 점화(2022)≠그리드 net",p:["그리드 규모 순에너지 핵융합 — 발전소 총출력이 총투입을 넘어 전력망에 순에너지 공급"]},
+{n:"🔬 미해결 · 끈이론·LQG 미완",p:["양자 중력 — 일반상대론과 양자역학을 조화시키는 일관된 중력 양자이론"]},
+{n:"🔬 미해결 · 단기만 리튬이온·양수",p:["대용량 장기 에너지 저장 — 그리드 규모 고밀도·장주기(다일/계절)·저비용 저장"]},
+{n:"🔬 미해결 · k–ε·ML은 근사",p:["난류 닫힘 문제 — RANS 평균화의 레이놀즈 응력 미지항의 제1원리 일반 닫힘"]},
+{n:"🔬 미해결 · DESI 2024–25 시변 시사",p:["암흑물질·암흑에너지 정체 — 중력으로만 추정되는 우주 에너지 ~95%의 물리적 정체"]},
+{n:"🔬 미해결 · Google 임계이하(2024–25) 이정표",p:["내결함성 확장형 양자컴퓨팅 — 노이즈 큐비트를 논리 큐비트로 부호화해 수백만 규모로 확장"]}
+]}
+]}
+];
+
 let D=D_INDUSTRY;
 let curDataset='industry';
 
@@ -772,6 +921,8 @@ function updateHints(){
   const el=document.getElementById('hints');
   const H=curDataset==='micro'
     ?{sol:['굿노트','클로바노트','MyFitnessPal','구글맵','Splitwise','CapCut','리멤버'],prob:['일일이','되감','매번','스크린샷','환산','수기']}
+    :curDataset==='defined'
+    ?{sol:['Dijkstra','RSA','Paxos','AlphaFold2','CRISPR','LIGO','Transformer'],prob:['P 대 NP','리만 가설','핵융합','양자 중력','전이','환각']}
     :{sol:['영화','카페','은행','수영장','정형외과','배달','미용실','게임'],prob:['배고픔','스트레스','불안','비싸다','시간 없다','고장','부족']};
   const sol=H.sol.map(x=>`<span class="hint" onclick="ds('${x}')">${x}</span>`).join('');
   const prob=H.prob.map(x=>`<span class="hint ph" onclick="ds('${x}')">${x}</span>`).join('');
@@ -856,7 +1007,7 @@ window.tg=tg;window.ds=ds;window.goFW=goFW;window.setView=setView;
 let gN=[],gE=[],gid=0,gCenter=null;
 function buildGraph(){
   gN=[];gE=[];gid=0;
-  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':'현대 산업',icon:curDataset==='micro'?'🔎':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
+  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':curDataset==='defined'?'정의된 문제':'현대 산업',icon:curDataset==='micro'?'🔎':curDataset==='defined'?'📐':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
   gN.push(gCenter);
   D.forEach(d=>{
     const dn={id:gid++,type:'domain',title:d.title,icon:d.icon,color:d.color,r:16,did:d.id,subs:d.subs,x:0,y:0,vx:0,vy:0};
@@ -985,11 +1136,13 @@ function renderGraph(){gSim();gDraw();requestAnimationFrame(renderGraph)}
 function setDataset(name){
   if(curDataset===name)return;
   curDataset=name;
-  D=name==='micro'?D_MICRO:D_INDUSTRY;
+  D=name==='micro'?D_MICRO:name==='defined'?D_DEFINED:D_INDUSTRY;
   document.querySelectorAll('.ds-tab').forEach(b=>b.classList.toggle('active',b.dataset.ds===name));
   const sub=document.getElementById('topSub');
   if(sub)sub.textContent=name==='micro'
     ?'솔루션은 있는데 여전히 손이 가는 아주 작은 불편들 — 실제 리뷰·포럼 근거 기반'
+    :name==='defined'
+    ?'논문·교과서가 정의한 문제 — ✅ 해결됨은 실제 솔루션, 🔬 미해결은 정의만'
     :'문제가 솔루션을 만든다 — 세 가지 뷰로 탐색하세요';
   search='';document.getElementById('si').value='';openP.clear();gActive=null;
   cam={x:0,y:0,z:0.4};
