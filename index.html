@@ -1183,9 +1183,12 @@ window.tg=tg;window.ds=ds;window.goFW=goFW;window.setView=setView;
 // ══════════ GRAPH ══════════
 // 깊이별 동심원 링: center(0) → domain → sub → solution → problem(가장 바깥 엔드포인트)
 const gRing={center:0,domain:200,sub:360,solution:520,problem:680};
+// 냉각: 레이아웃이 자리 잡으면 시뮬 정지 → 클릭·하이라이트 중 노드가 흘러다니지 않음
+let gAlpha=1;
+function gReheat(){gAlpha=1}
 let gN=[],gE=[],gid=0,gCenter=null;
 function buildGraph(){
-  gN=[];gE=[];gid=0;
+  gN=[];gE=[];gid=0;gReheat();
   gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':curDataset==='defined'?'정의된 문제':curDataset==='leeo'?'리이오 앱':curDataset==='opp'?'다뤄볼 문제':'현대 산업',icon:curDataset==='micro'?'🔎':curDataset==='defined'?'📐':curDataset==='leeo'?'🍎':curDataset==='opp'?'🌱':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
   gN.push(gCenter);
   D.forEach(d=>{
@@ -1227,11 +1230,12 @@ let gVis=new Set(['center','domain','sub','solution','problem']);
 let gActive=null,gHov=null;
 
 function setDepth(d){document.querySelectorAll('.gd-btn').forEach(b=>b.classList.toggle('active',b.dataset.d===d));
-gVis=d==='all'?new Set(['center','domain','sub','solution','problem']):d==='domain'?new Set(['center','domain']):d==='sub'?new Set(['center','domain','sub']):d==='sol'?new Set(['center','domain','sub','solution']):new Set(['center','domain','sub','solution','problem'])}
+gVis=d==='all'?new Set(['center','domain','sub','solution','problem']):d==='domain'?new Set(['center','domain']):d==='sub'?new Set(['center','domain','sub']):d==='sol'?new Set(['center','domain','sub','solution']):new Set(['center','domain','sub','solution','problem']);gReheat()}
 window.setDepth=setDepth;
 
 const gF={rep:280,repCut:300,len:{cd:200,ds:180,se:165,sp:160},str:0.008,damp:0.86,ringK:0.045};
 function gSim(){
+  if(gAlpha<0.02)return;gAlpha*=0.985;
   for(let i=0;i<gN.length;i++){if(!gVis.has(gN[i].type))continue;for(let j=i+1;j<gN.length;j++){if(!gVis.has(gN[j].type))continue;const a=gN[i],b=gN[j];let dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;if(d<gF.repCut){let f=gF.rep/(d*d),fx=dx/d*f,fy=dy/d*f;if(a.type!=='center'){a.vx-=fx;a.vy-=fy}if(b.type!=='center'){b.vx+=fx;b.vy+=fy}}}}
   gE.forEach(e=>{const a=gN[e.s],b=gN[e.t];if(!gVis.has(a.type)||!gVis.has(b.type))return;let dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;let f=(d-(gF.len[e.tp]||80))*gF.str,fx=dx/d*f,fy=dy/d*f;if(a.type!=='center'){a.vx+=fx;a.vy+=fy}if(b.type!=='center'){b.vx-=fx;b.vy-=fy}});
   gN.forEach(n=>{if(n.type==='center'){n.x=0;n.y=0;return}
@@ -1308,7 +1312,7 @@ function doGraphSearch(kw){
   if(!matched.size){gActive=null;return}
   const family=new Set([gCenter.id]);matched.forEach(id=>{const f=gFamily(id);f.forEach(x=>family.add(x))});
   gActive=family;
-  gVis=new Set(['center','domain','sub','solution','problem']);
+  gVis=new Set(['center','domain','sub','solution','problem']);gReheat();
   document.querySelectorAll('.gd-btn').forEach(b=>b.classList.toggle('active',b.dataset.d==='all'));
   const hN=[...matched].map(id=>gN[id]).filter(Boolean);
   if(hN.length){let cx_=0,cy_=0;hN.forEach(n=>{cx_+=n.x;cy_+=n.y});cx_/=hN.length;cy_/=hN.length;
