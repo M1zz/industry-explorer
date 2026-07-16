@@ -149,6 +149,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     <button class="ds-tab" data-ds="micro" onclick="setDataset('micro')">🔎 미세 불편</button>
     <button class="ds-tab" data-ds="defined" onclick="setDataset('defined')">📐 정의된 문제</button>
     <button class="ds-tab" data-ds="leeo" onclick="setDataset('leeo')">🍎 리이오 앱</button>
+    <button class="ds-tab" data-ds="opp" onclick="setDataset('opp')">🌱 다뤄볼 문제</button>
   </div>
 </div>
 
@@ -994,6 +995,59 @@ const D_LEEO=[
 ]}
 ];
 
+const D_OPP=[
+{id:"opp-scan",icon:"📸",title:"기록·스캔 (미개척)",color:"#6c5ce7",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🧩 반듯 — 슬라이드·판서 자동 보정",p:[{pain:"강연·수업서 찍은 사진이 사다리꼴에 테두리까지 나와 매번 크롭·리사이즈",who:"대학생·강연 자주 듣는 직장인",when:"강의 슬라이드·화이트보드를 찍어 모을 때",gap:"기본 카메라는 원근보정 없음 · 리이오 강점: 픽셀미미/펀칭의 사진처리 + 앨범 정리·위젯"}]},
+{n:"🧩 널널노트 — 필기 사진 과목·날짜 자동 앨범",p:[{pain:"손글씨 노트·교재 사진이 'Screenshot_날짜'로만 남아 나중에 못 찾음",who:"필기를 사진으로 남기는 학생",when:"시험기간 특정 개념을 찾을 때",gap:"갤러리는 과목·주차 분류 없음 · 리이오 강점: 태그·기록·검색 UX"}]}
+]}
+]},
+{id:"opp-kitchen",icon:"🍳",title:"주방·요리 (미개척)",color:"#e17055",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🧩 동시냄비 — 라벨 붙은 멀티 요리 타이머",p:[{pain:"밥·국·구이 동시 조리 시 기본 타이머는 하나뿐이라 지우고 새로 설정, 뭐가 뭔지 헷갈림",who:"집에서 여러 요리 동시에 하는 사람",when:"여러 냄비를 동시에 올릴 때",gap:"기본 타이머는 단일·무라벨 · 리이오 강점: StickyPresenter 타이머 노하우 + 위젯"}]},
+{n:"🧩 언제까지 — 밀프렙·남은음식 유통기한 위젯",p:[{pain:"소분한 반찬·남은 배달음식이 언제까지인지 몰라 상해서 버림",who:"밀프렙·자취·냉장고 관리하는 사람",when:"먹을지 말지 매번 고민할 때",gap:"통마다 손으로 날짜 적기 귀찮음 · 리이오 강점: 클로즈드(장보기)·두번알림 인접, 위젯"}]},
+{n:"🧩 몇그램 — 재료별 계량·인분 스케일러",p:[{pain:"컵↔그램이 재료마다 밀도가 달라 안 맞고, 2인분→1인분 계란 0.5개 애매",who:"레시피 따라 요리·베이킹하는 사람",when:"분량을 줄이거나 단위 바꿀 때",gap:"일반 계산기는 재료 밀도 모름 · 리이오 강점: 확률계산기류 유틸 설계"}]}
+]}
+]},
+{id:"opp-pet",icon:"🐾",title:"반려동물 (신규 도메인)",color:"#00b894",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🆕🧩 밥줬냐 — 가족 공유 급여·투약 원탭 로그",p:[{pain:"누가 밥 줬는지 몰라 두 번 주거나 아무도 안 줌",who:"가족이 함께 반려동물 키우는 집",when:"밥·약 줄 때마다",gap:"메신저로 '밥 줬어?' 묻는 게 일 · 리이오 강점: 골드위크(실시간 공유)+두번알림+원탭 위젯"}]},
+{n:"🆕🧩 안고빼기 — 반려동물 체중 기록·성장그래프",p:[{pain:"저울에 안 앉는 고양이는 안고 재서 사람 몸무게를 빼는 산수를 매번 함",who:"다이어트·건강 관리 중인 반려인",when:"주 1회 체중 잴 때",gap:"수동 뺄셈·기록 흩어짐 · 리이오 강점: 시각화(무지개공작소)·기록 UX"}]},
+{n:"🆕🧩 월산충 — 월 1회 예방약 투여일 추적·알림",p:[{pain:"심장사상충·구충약을 이번 달 줬는지, 며칠에 줬는지 기억 안 남",who:"예방약 챙기는 반려인",when:"매월 투약 시점",gap:"알림 울려도 이미 준 건지 확인 불가 · 리이오 강점: 두번알림·완료체크·기록"}]}
+]}
+]},
+{id:"opp-travel",icon:"✈️",title:"여행 (신규 도메인)",color:"#0984e3",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🆕🧩 동선순 — 저장 장소를 방문 순서로 정렬",p:[{pain:"구글맵에 200곳 저장해도 정렬·폴더가 없어 방문 순서를 하나씩 드래그",who:"여행 동선을 미리 짜는 J 성향 여행자",when:"여행 전 일정·동선을 짤 때",gap:"리스트는 정렬·경로 연결 안 됨 · 리이오 강점: 한국길찾기(지도)·정리 UX"}]},
+{n:"🆕🧩 시차정리 — 여행 사진 촬영시각 일괄 시프트",p:[{pain:"카메라 시계를 현지로 안 바꿔 사진 순서가 뒤엉키고 앨범 자동분류가 깨짐",who:"해외여행 사진 정리하는 사람",when:"귀국 후 수백 장 정리할 때",gap:"EXIF 시간 수동 보정은 번거로움 · 리이오 강점: 사진앱(픽셀미미/펀칭) 노하우"}]},
+{n:"🆕🧩 얼마썼지 — 다중통화 여행 가계부",p:[{pain:"나라마다 통화 달라 결제할 때마다 환산·기록, 정산이 엉킴",who:"해외·다국가 여행자, 더치페이",when:"여행 중 결제·귀국 후 정산",gap:"Splitwise 다중통화는 유료·엉킴 · 리이오 강점: 확률계산기류 계산 + 기록·시각화"}]}
+]}
+]},
+{id:"opp-fit",icon:"💪",title:"운동·건강 확장",color:"#d63031",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🧩 세트새 — 세트 사이 원탭·음성 운동 로그",p:[{pain:"세트마다 무게·횟수 타이핑하느라 쉬는 시간 절반이 날아가고 땀·초크 묻은 손엔 입력 안 됨",who:"웨이트 기록하는 헬스인",when:"세트 사이 쉬는 시간",gap:"기존 앱은 탭 여러 번 · 리이오 강점: 쿨타임(습관·스트릭)·원탭 위젯 인접"}]},
+{n:"🧩 주간볼륨 — 부위별 주간 세트·볼륨 자동 집계",p:[{pain:"이번 주 가슴·등 부위별 총 세트를 그래프 보며 손으로 합산",who:"볼륨 관리하는 중급 이상 운동인",when:"주간 루틴을 점검할 때",gap:"앱들이 부위별 주간합을 한눈에 안 줌 · 리이오 강점: 무지개공작소류 주간 시각화"}]}
+]}
+]},
+{id:"opp-home",icon:"🏠",title:"생활·환경 (정의된 문제 파생)",color:"#636e72",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"📐 쿵쿵기록 — 층간소음 dB·시각 증거 로그",p:[{pain:"층간소음이 언제 얼마나 심했는지 증거가 안 남아 민원·대응이 막막",who:"공동주택에서 층간소음 겪는 사람",when:"밤·이른 아침 소음이 날 때",gap:"근본해결(정의된 미해결 문제)은 아니나 '기록·증거·패턴'은 앱으로 가능 · 리이오 강점: 기록·시각화·타임스탬프"}]},
+{n:"📐 오늘공기 — 실내외 미세먼지 비교·환기 알림",p:[{pain:"실외 미세먼지 나쁠 때 언제 환기할지 몰라 오히려 실내를 악화시킴",who:"호흡기 민감·환기 챙기는 사람",when:"미세먼지·황사 시기 하루",gap:"실외는 근본해결 불가지만 '환기 타이밍 안내'는 가능 · 리이오 강점: 알림·위젯"}]}
+]}
+]},
+{id:"opp-money",icon:"💸",title:"돈·소비 (퇴사각 인접)",color:"#fdcb6e",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🆕 구독털이 — 잊은 구독·갱신일 알림·연지출 시각화",p:[{pain:"안 쓰는 구독이 자동결제로 새어나가고 갱신일을 놓침",who:"구독 서비스 많은 사람",when:"갱신일 전·월말 지출 점검",gap:"카드내역 훑어보기 번거로움 · 리이오 강점: 두번알림+FIRE(퇴사각) 재무 인접+시각화"}]},
+{n:"🧩 영수증가계부 — 촬영→항목 자동 기록",p:[{pain:"영수증을 찍어도 결국 날짜·금액을 손으로 옮겨 적음",who:"가계부·경비 정리하는 개인",when:"지출 후 기록할 때",gap:"스캔은 되나 입력이 수동 · 리이오 강점: 사진처리+기록 UX"}]}
+]}
+]},
+{id:"opp-sleep",icon:"😴",title:"수면·리듬 (달빛 확장)",color:"#a29bfe",subs:[
+{title:"🌱 다뤄볼 만한 것",ep:[
+{n:"🆕 몇시에잘래 — 기상 목표 역산 취침 알림·루틴",p:[{pain:"일어날 시각은 정해도 언제 자야 할지 역산·습관화가 안 됨",who:"수면 루틴을 잡고 싶은 사람",when:"밤마다 취침 준비",gap:"알람은 기상만, 취침 유도 없음 · 리이오 강점: 달빛(수면 사운드) 확장+두번알림"}]}
+]}
+]}
+];
+
 let D=D_INDUSTRY;
 let curDataset='industry';
 
@@ -1044,6 +1098,8 @@ function updateHints(){
     ?{sol:['Dijkstra','RSA','Paxos','AlphaFold2','CRISPR','LIGO','Transformer'],prob:['P 대 NP','리만 가설','핵융합','양자 중력','전이','환각']}
     :curDataset==='leeo'
     ?{sol:['달빛','클립키보드','라포 맵','쿨타임','세끼','퇴사각','두번알림'],prob:['감정','반복 입력','관계','휴식','기록','일정','까먹음']}
+    :curDataset==='opp'
+    ?{sol:['반듯','동시냄비','밥줬냐','동선순','세트새','구독털이'],prob:['반려동물','여행','주방','층간소음','구독','스캔']}
     :{sol:['영화','카페','은행','수영장','정형외과','배달','미용실','게임'],prob:['배고픔','스트레스','불안','비싸다','시간 없다','고장','부족']};
   const sol=H.sol.map(x=>`<span class="hint" onclick="ds('${x}')">${x}</span>`).join('');
   const prob=H.prob.map(x=>`<span class="hint ph" onclick="ds('${x}')">${x}</span>`).join('');
@@ -1126,23 +1182,23 @@ window.tg=tg;window.ds=ds;window.goFW=goFW;window.setView=setView;
 
 // ══════════ GRAPH ══════════
 // 깊이별 동심원 링: center(0) → domain → sub → solution → problem(가장 바깥 엔드포인트)
-const gRing={center:0,domain:340,sub:680,solution:1000,problem:1320};
+const gRing={center:0,domain:200,sub:360,solution:520,problem:680};
 let gN=[],gE=[],gid=0,gCenter=null;
 function buildGraph(){
   gN=[];gE=[];gid=0;
-  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':curDataset==='defined'?'정의된 문제':curDataset==='leeo'?'리이오 앱':'현대 산업',icon:curDataset==='micro'?'🔎':curDataset==='defined'?'📐':curDataset==='leeo'?'🍎':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
+  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':curDataset==='defined'?'정의된 문제':curDataset==='leeo'?'리이오 앱':curDataset==='opp'?'다뤄볼 문제':'현대 산업',icon:curDataset==='micro'?'🔎':curDataset==='defined'?'📐':curDataset==='leeo'?'🍎':curDataset==='opp'?'🌱':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
   gN.push(gCenter);
   D.forEach(d=>{
     const dn={id:gid++,type:'domain',title:d.title,icon:d.icon,color:d.color,r:16,did:d.id,subs:d.subs,x:0,y:0,vx:0,vy:0};
     gN.push(dn);gE.push({s:gCenter.id,t:dn.id,tp:'cd'});
     d.subs.forEach(sub=>{
-      const sn={id:gid++,type:'sub',title:sub.title,color:d.color,r:6,did:d.id,pDom:d.title,pIcon:d.icon,ep:sub.ep,x:0,y:0,vx:0,vy:0};
+      const sn={id:gid++,type:'sub',title:sub.title,color:d.color,r:7,did:d.id,pDom:d.title,pIcon:d.icon,ep:sub.ep,x:0,y:0,vx:0,vy:0};
       gN.push(sn);gE.push({s:dn.id,t:sn.id,tp:'ds'});
       sub.ep.forEach(e=>{
-        const en={id:gid++,type:'solution',title:e.n,color:'#2ed573',r:3,did:d.id,pDom:d.title,pIcon:d.icon,pSub:sub.title,probs:e.p,url:e.u,x:0,y:0,vx:0,vy:0};
+        const en={id:gid++,type:'solution',title:e.n,color:'#2ed573',r:4,did:d.id,pDom:d.title,pIcon:d.icon,pSub:sub.title,probs:e.p,url:e.u,x:0,y:0,vx:0,vy:0};
         gN.push(en);gE.push({s:sn.id,t:en.id,tp:'se'});
         e.p.forEach(pr=>{
-          const pn={id:gid++,type:'problem',title:pT(pr),pObj:pr,color:'#ff4757',r:2.5,did:d.id,pSol:e.n,pDom:d.title,pSub:sub.title,x:0,y:0,vx:0,vy:0};
+          const pn={id:gid++,type:'problem',title:pT(pr),pObj:pr,color:'#ff4757',r:3.2,did:d.id,pSol:e.n,pDom:d.title,pSub:sub.title,x:0,y:0,vx:0,vy:0};
           gN.push(pn);gE.push({s:en.id,t:pn.id,tp:'sp'});
         });
       });
@@ -1165,7 +1221,7 @@ const cv=document.getElementById('cv'),cx=cv.getContext('2d');
 let gW,gH,dpr;
 function gResize(){dpr=window.devicePixelRatio||1;const cont=document.getElementById('graphView');gW=cont.clientWidth;gH=cont.clientHeight;cv.width=gW*dpr;cv.height=gH*dpr;cv.style.width=gW+'px';cv.style.height=gH+'px';cx.setTransform(dpr,0,0,dpr,0,0)}
 
-let cam={x:0,y:0,z:0.2};
+let cam={x:0,y:0,z:0.36};
 function s2w(sx,sy){return{x:(sx-gW/2)/cam.z+cam.x,y:(sy-gH/2)/cam.z+cam.y}}
 let gVis=new Set(['center','domain','sub','solution','problem']);
 let gActive=null,gHov=null;
@@ -1174,7 +1230,7 @@ function setDepth(d){document.querySelectorAll('.gd-btn').forEach(b=>b.classList
 gVis=d==='all'?new Set(['center','domain','sub','solution','problem']):d==='domain'?new Set(['center','domain']):d==='sub'?new Set(['center','domain','sub']):d==='sol'?new Set(['center','domain','sub','solution']):new Set(['center','domain','sub','solution','problem'])}
 window.setDepth=setDepth;
 
-const gF={rep:520,repCut:760,len:{cd:340,ds:340,se:320,sp:320},str:0.007,damp:0.86,ringK:0.035};
+const gF={rep:280,repCut:300,len:{cd:200,ds:180,se:165,sp:160},str:0.008,damp:0.86,ringK:0.045};
 function gSim(){
   for(let i=0;i<gN.length;i++){if(!gVis.has(gN[i].type))continue;for(let j=i+1;j<gN.length;j++){if(!gVis.has(gN[j].type))continue;const a=gN[i],b=gN[j];let dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;if(d<gF.repCut){let f=gF.rep/(d*d),fx=dx/d*f,fy=dy/d*f;if(a.type!=='center'){a.vx-=fx;a.vy-=fy}if(b.type!=='center'){b.vx+=fx;b.vy+=fy}}}}
   gE.forEach(e=>{const a=gN[e.s],b=gN[e.t];if(!gVis.has(a.type)||!gVis.has(b.type))return;let dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;let f=(d-(gF.len[e.tp]||80))*gF.str,fx=dx/d*f,fy=dy/d*f;if(a.type!=='center'){a.vx+=fx;a.vy+=fy}if(b.type!=='center'){b.vx-=fx;b.vy-=fy}});
@@ -1267,7 +1323,7 @@ function renderGraph(){gSim();gDraw();requestAnimationFrame(renderGraph)}
 function setDataset(name){
   if(curDataset===name)return;
   curDataset=name;
-  D=name==='micro'?D_MICRO:name==='defined'?D_DEFINED:name==='leeo'?D_LEEO:D_INDUSTRY;
+  D=name==='micro'?D_MICRO:name==='defined'?D_DEFINED:name==='leeo'?D_LEEO:name==='opp'?D_OPP:D_INDUSTRY;
   document.querySelectorAll('.ds-tab').forEach(b=>b.classList.toggle('active',b.dataset.ds===name));
   const sub=document.getElementById('topSub');
   if(sub)sub.textContent=name==='micro'
@@ -1276,9 +1332,11 @@ function setDataset(name){
     ?'논문·교과서가 정의한 문제 — ✅ 해결됨은 실제 솔루션, 🔬 미해결은 정의만'
     :name==='leeo'
     ?'리이오가 만든 앱이 푸는 실제 문제 지도 — 문제(누가·언제·기존한계) → 🍎 앱'
+    :name==='opp'
+    ?'리이오가 다뤄볼 만한 문제 — 🧩미세불편·📐정의된문제 파생·🆕신규도메인 (기존 앱과 미중복)'
     :'문제가 솔루션을 만든다 — 세 가지 뷰로 탐색하세요';
   search='';document.getElementById('si').value='';openP.clear();gActive=null;
-  cam={x:0,y:0,z:0.2};
+  cam={x:0,y:0,z:0.36};
   buildRev();buildGraph();
   updateHints();render();
   if(view==='graph')gResize();
