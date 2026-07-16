@@ -24,8 +24,14 @@
 - [x] 정의된 문제 리서치 (7분야 102개: ✅해결 65 + 🔬미해결 37) → defined-problems.json
 - [x] "📐 정의된 문제" 토글 통합 (D_DEFINED, setDataset/updateHints/buildGraph 확장)
 
-## 데이터셋 현황 (3종 토글)
-- 🏭 산업 지도 (D_INDUSTRY) · 🔎 미세 불편 (D_MICRO) · 📐 정의된 문제 (D_DEFINED)
+## 데이터셋 현황 (4종 토글)
+- 🏭 산업 지도 (D_INDUSTRY) · 🔎 미세 불편 (D_MICRO) · 📐 정의된 문제 (D_DEFINED) · 🍎 리이오 앱 (D_LEEO)
+
+## 리이오의 문제 해결지도 — 완료
+- [x] app-portfolio(35개 앱 JSON)의 vision·featureMetadata에서 문제 추출
+- [x] 8개 문제-테마 × 31개 앱 × 44개 문제, {pain,who,when,gap} 스키마
+- [x] leeo-map.json 소스(ev=App Store URL) → gen_leeo.py로 index.html D_LEEO 생성
+- [x] "🍎 리이오 앱" 4번째 토글 통합
 
 ## 정의된 문제 확장 — 완료
 - [x] 전 항목 {pain,who,when,gap} 구조화 (pStr/pBox 호환)

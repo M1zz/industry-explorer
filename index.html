@@ -146,6 +146,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     <button class="ds-tab active" data-ds="industry" onclick="setDataset('industry')">🏭 산업 지도</button>
     <button class="ds-tab" data-ds="micro" onclick="setDataset('micro')">🔎 미세 불편</button>
     <button class="ds-tab" data-ds="defined" onclick="setDataset('defined')">📐 정의된 문제</button>
+    <button class="ds-tab" data-ds="leeo" onclick="setDataset('leeo')">🍎 리이오 앱</button>
   </div>
 </div>
 
@@ -925,6 +926,72 @@ const D_DEFINED=[
 ]}
 ];
 
+const D_LEEO=[
+{id:"leeo-mind",icon:"🧠",title:"마음·감정 돌봄",color:"#a29bfe",subs:[
+{title:"앱",ep:[
+{n:"달빛",p:[{pain:"일상 스트레스로 이완과 수면이 어려움",who:"스트레스 많은 직장인·불면인",when:"잠들기 전이나 쉬고 싶을 때",gap:"고품질 자연 소리·가이드 명상 부재"},{pain:"나에게 맞는 소리 조합을 찾기 어려움",who:"힐링이 필요한 사람",when:"집중하거나 수면을 유도할 때",gap:"자유로운 사운드 믹싱 기능 부족"}]},
+{n:"욕망의 무지개",p:[{pain:"복잡한 감정을 말로 표현·이해하기 어려움",who:"감정 관리가 필요한 사람",when:"하루의 감정을 돌아볼 때",gap:"감정을 색으로 시각화하는 도구 부재"},{pain:"감정의 흐름과 패턴을 파악하지 못함",who:"자기 감정을 탐구하려는 사람",when:"감정 변화 추이를 확인할 때",gap:"비판단적 감정 패턴 시각화 부재"}]},
+{n:"리바운드 저널",p:[{pain:"힘든 시기 극복 과정을 혼자 감당하기 벅참",who:"어려운 시기를 겪거나 극복 중인 사람",when:"회복 과정을 기록하고 싶을 때",gap:"회복 여정을 단계별로 남기는 안전한 공간 부재"},{pain:"작은 진전이 눈에 안 보여 쉽게 좌절",who:"회복 중인 사람",when:"긍정적 변화를 확인하고 싶을 때",gap:"회복 과정을 시각화하는 도구 부재"}]}
+]}
+]},
+{id:"leeo-log",icon:"📝",title:"기록·습관·저널",color:"#74b9ff",subs:[
+{title:"앱",ep:[
+{n:"꿈을 찾아서",p:[{pain:"버킷리스트가 잊혀지는 단순 체크리스트로 끝남",who:"목표를 세우고 실천하려는 20-30대",when:"새 꿈을 세우거나 이루었을 때",gap:"사진으로 여정을 남기는 시각적 기록이 없었음"},{pain:"목표 달성 동기가 금방 사그라듦",who:"새로운 경험을 추구하는 사람",when:"매일 꿈을 상기하고 싶을 때",gap:"위젯·사진으로 동기부여하는 기능 부족"}]},
+{n:"인생 맛집",p:[{pain:"갔던 맛집을 기억 못하고 잊어버림",who:"외식·맛집 탐방을 즐기는 사람",when:"식사 후 기록으로 남길 때",gap:"사진·평점을 모은 나만의 맛집 지도 부재"},{pain:"대중 평점이 내 입맛과 맞지 않음",who:"자기 기준이 있는 미식가",when:"다음에 갈 곳을 고를 때",gap:"내 기준의 개인 평가 기록 부재"}]},
+{n:"무지개 공작소",p:[{pain:"일주일을 어떻게 보내는지 한눈에 안 보임",who:"시간 사용을 돌아보려는 사람",when:"한 주를 계획하거나 회고할 때",gap:"일주일을 블록으로 시각화하는 도구 부재"}]},
+{n:"이어생각",p:[{pain:"흐르던 생각이 끊겨 이어가지 못함",who:"생각을 메모로 정리하는 사람",when:"떠오른 생각을 이어 적을 때",gap:"생각을 이어가도록 돕는 메모장 부재"}]}
+]}
+]},
+{id:"leeo-prod",icon:"⚡",title:"생산성·입력도구",color:"#fdcb6e",subs:[
+{title:"앱",ep:[
+{n:"클립키보드",p:[{pain:"매일 같은 텍스트를 반복 입력하며 시간 낭비",who:"이메일·고객응대가 많은 직장인",when:"반복 문구를 입력할 때",gap:"한 번에 붙여넣는 템플릿 입력 수단 부족"},{pain:"생산성 향상이 추상적이라 체감 안 됨",who:"반복 업무 종사자",when:"템플릿을 사용할 때마다",gap:"절약한 시간을 숫자·마일스톤으로 보여주는 성취감 부재"}]},
+{n:"탭클립 키보드",p:[{pain:"iOS에서 저장한 클립을 맥에서 쓸 수 없음",who:"반복 텍스트를 여러 기기서 쓰는 사람",when:"맥에서 저장한 문구를 입력할 때",gap:"iOS-맥 간 클립 데이터 연동 부재"}]},
+{n:"두번알림",p:[{pain:"한 번 알림은 놓치면 끝이라 중요한 일을 놓침",who:"건망증이 있는 사람",when:"중요한 일정·약속 시각에",gap:"두 번 알려주는 이중 안전망 부재"},{pain:"단일 알림은 ADHD·고령층에게 신뢰가 부족",who:"기억 보조가 필요한 사람",when:"잊기 쉬운 일을 상기해야 할 때",gap:"유연한 간격의 재알림 부재"}]},
+{n:"일정 비서",p:[{pain:"바쁜 일정 속 최적 시간 배분이 어려움",who:"일정이 많은 직장인·프리랜서",when:"일정을 잡고 조율할 때",gap:"AI가 최적 시간대를 제안하는 기능 부재"},{pain:"일정이 충돌해 스케줄이 꼬임",who:"여러 일정을 관리하는 사람",when:"새 일정을 추가할 때",gap:"충돌 없는 자동 시간 배분 부재"}]},
+{n:"StickyPresenter",p:[{pain:"발표 중 시간 관리가 어려움",who:"키노트로 발표하는 사람",when:"프레젠테이션을 진행할 때",gap:"키노트와 함께 쓰는 타이머 부재"}]}
+]}
+]},
+{id:"leeo-relation",icon:"🤝",title:"관계·소통",color:"#fd79a8",subs:[
+{title:"앱",ep:[
+{n:"라포 맵",p:[{pain:"연락처만으로는 관계의 맥락이 남지 않음",who:"멘토링·네트워킹을 하는 사람",when:"사람을 만난 직후 메모할 때",gap:"만남·대화·약속을 기록하는 관계 도구 부재"},{pain:"다음 만남 전 지난 대화가 기억나지 않음",who:"고객·인맥을 관리하는 전문가",when:"재회 전 이전 기록을 확인할 때",gap:"관계 유형별 맥락 관리 부재"}]},
+{n:"링롱",p:[{pain:"도움 줄 멘토를 어디서 찾을지 모름",who:"멘토를 찾는 멘티",when:"멘토링·조언이 필요할 때",gap:"멘토의 위치를 찾는 연결 수단 부재"}]},
+{n:"골드위크",p:[{pain:"가족·팀의 일정이 흩어져 공유가 안 됨",who:"가족·커플·팀 단위 사용자",when:"함께 일정을 계획할 때",gap:"실시간 동기화되는 공유 플래너 부재"},{pain:"서로 일정을 몰라 충돌·혼선 발생",who:"맞벌이 부부·소규모 팀",when:"누가 무엇을 하는지 확인할 때",gap:"실시간 공유로 충돌을 사전 방지하는 수단 부족"}]}
+]}
+]},
+{id:"leeo-health",icon:"🏃",title:"건강·몸",color:"#55efc4",subs:[
+{title:"앱",ep:[
+{n:"쿨타임",p:[{pain:"장시간 화면 사용으로 눈 피로·건강 악화",who:"오래 컴퓨터를 쓰는 개발자·직장인",when:"작업에 몰입해 휴식을 잊을 때",gap:"20-20-20 규칙을 자동 관리하는 도구 부재"},{pain:"휴식이 필요한 걸 알아도 습관화 못함",who:"사무직 근로자",when:"20분마다 쉬어야 할 때",gap:"배지·스트릭으로 휴식 습관을 만드는 장치 부족"}]},
+{n:"세끼",p:[{pain:"매일 먹은 것을 기록·관리하기 번거로움",who:"다이어트·건강 관리에 관심 있는 사람",when:"식사 후 간편히 기록할 때",gap:"사진 기반 간편 기록과 AI 분석 부재"},{pain:"식습관을 객관적으로 파악하지 못함",who:"건강한 식습관을 원하는 사람",when:"주간 식단을 돌아볼 때",gap:"긍정 피드백 중심의 식습관 분석 부재"}]}
+]}
+]},
+{id:"leeo-learn",icon:"📚",title:"학습·성장",color:"#81ecec",subs:[
+{title:"앱",ep:[
+{n:"스픽플로우",p:[{pain:"원하는 회화를 반복 연습할 방법이 마땅찮음",who:"외국어 회화를 익히려는 학습자",when:"특정 표현을 반복 연습할 때",gap:"원하는 회화를 반복 연습하는 도구 부재"}]},
+{n:"사노라면",p:[{pain:"인도네시아어 기초를 쉽게 배울 곳이 없음",who:"인도네시아어를 배우려는 사람",when:"간단한 표현을 익히고 싶을 때",gap:"간편한 인도네시아어 학습 도구 부재"}]},
+{n:"낫마템포",p:[{pain:"연주 중 손이 바빠 메트로놈을 조작할 수 없음",who:"악기를 연습하는 연주자",when:"두 손으로 연주하며 박자를 맞출 때",gap:"손을 대지 않고 제어하는 메트로놈 부재"}]},
+{n:"초견",p:[{pain:"악보를 보고 음을 상상·확인하기 어려움",who:"초견을 연습하는 음악 학습자",when:"악보의 음을 직접 들어보고 싶을 때",gap:"음표를 찍어 바로 들어보는 도구 부재"}]}
+]}
+]},
+{id:"leeo-fun",icon:"🎲",title:"재미·놀이·표현",color:"#ff7675",subs:[
+{title:"앱",ep:[
+{n:"오늘의 주접",p:[{pain:"무미건조한 하루에 기분 좋은 한마디가 없음",who:"위트·칭찬으로 기분전환하고 싶은 사람",when:"지치거나 심심할 때",gap:"매일 새로운 주접·칭찬을 건네주는 앱 부재"}]},
+{n:"픽셀 미미",p:[{pain:"평범한 사진을 개성 있는 픽셀아트로 못 만듦",who:"레트로 감성 콘텐츠를 즐기는 사람",when:"사진을 꾸며 공유할 때",gap:"사진을 픽셀아트로 변환하는 간편 도구 부재"}]},
+{n:"펀칭",p:[{pain:"내가 찍은 사진을 스티커로 만들기 번거로움",who:"사진으로 스티커를 만들고 싶은 사람",when:"사진을 찍어 바로 활용할 때",gap:"촬영 즉시 스티커로 만드는 카메라 부재"}]},
+{n:"LeeoCon",p:[{pain:"iMessage 대화에 개성 있는 표현 수단이 부족",who:"iMessage 사용자",when:"메시지로 감정·재미를 표현할 때",gap:"새로운 스티커 표현 수단 부재"}]}
+]}
+]},
+{id:"leeo-tool",icon:"🧭",title:"실용·생활도구",color:"#b2bec3",subs:[
+{title:"앱",ep:[
+{n:"잊지마",p:[{pain:"중요한 일정을 깜빡하고 놓침",who:"일정 관리가 필요한 사람",when:"이동 중 일정을 확인해야 할 때",gap:"아이폰에서 일정을 쉽게 보는 방법이 없었음"}]},
+{n:"클로즈드",p:[{pain:"마트마다 살 것이 달라 품목을 빠뜨리기 쉬움",who:"정기적으로 장보는 주부·자취생",when:"마트에 도착해 목록을 확인할 때",gap:"마트별 맞춤 리스트를 주는 도구 부재"},{pain:"매번 앱을 열어 확인하기 번거로움",who:"가족 구성원",when:"장보기 전 빠르게 확인할 때",gap:"위젯·가족 공유로 앱 안 열고 보는 편의성 부족"}]},
+{n:"불타는 내인생",p:[{pain:"소중한 자유시간이 어떻게 사라지는지 자각 못함",who:"저녁·여가 시간을 흘려보내는 사람",when:"하루 자유시간을 되돌아볼 때",gap:"시간이 타서 사라짐을 시각적으로 보여주는 도구 부재"}]},
+{n:"퇴사각",p:[{pain:"언제 은퇴·퇴사할 수 있을지 막막함",who:"은퇴·경제적 자유를 계획하는 직장인",when:"재무 목표와 시점을 점검할 때",gap:"은퇴 가능 시점을 계산해주는 도구 부재"}]},
+{n:"한국길찾기",p:[{pain:"기존 길찾기가 접근성이 부족해 이용이 어려움",who:"접근성 배려가 필요한 사용자",when:"낯선 곳에서 길을 찾을 때",gap:"접근성을 고려한 길찾기 도구 부재"}]},
+{n:"확률계산기",p:[{pain:"복잡한 확률을 손으로 계산하기 번거로움",who:"게임·통계·의사결정에 확률이 필요한 사람",when:"당첨·성공 확률을 따질 때",gap:"직관적인 확률 계산 도구 부재"}]}
+]}
+]}
+];
+
 let D=D_INDUSTRY;
 let curDataset='industry';
 
@@ -973,6 +1040,8 @@ function updateHints(){
     ?{sol:['굿노트','클로바노트','MyFitnessPal','구글맵','Splitwise','CapCut','리멤버'],prob:['일일이','되감','매번','스크린샷','환산','수기']}
     :curDataset==='defined'
     ?{sol:['Dijkstra','RSA','Paxos','AlphaFold2','CRISPR','LIGO','Transformer'],prob:['P 대 NP','리만 가설','핵융합','양자 중력','전이','환각']}
+    :curDataset==='leeo'
+    ?{sol:['달빛','클립키보드','라포 맵','쿨타임','세끼','퇴사각','두번알림'],prob:['감정','반복 입력','관계','휴식','기록','일정','까먹음']}
     :{sol:['영화','카페','은행','수영장','정형외과','배달','미용실','게임'],prob:['배고픔','스트레스','불안','비싸다','시간 없다','고장','부족']};
   const sol=H.sol.map(x=>`<span class="hint" onclick="ds('${x}')">${x}</span>`).join('');
   const prob=H.prob.map(x=>`<span class="hint ph" onclick="ds('${x}')">${x}</span>`).join('');
@@ -1057,7 +1126,7 @@ window.tg=tg;window.ds=ds;window.goFW=goFW;window.setView=setView;
 let gN=[],gE=[],gid=0,gCenter=null;
 function buildGraph(){
   gN=[];gE=[];gid=0;
-  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':curDataset==='defined'?'정의된 문제':'현대 산업',icon:curDataset==='micro'?'🔎':curDataset==='defined'?'📐':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
+  gCenter={id:gid++,type:'center',title:curDataset==='micro'?'미세 불편':curDataset==='defined'?'정의된 문제':curDataset==='leeo'?'리이오 앱':'현대 산업',icon:curDataset==='micro'?'🔎':curDataset==='defined'?'📐':curDataset==='leeo'?'🍎':'🌐',color:'#ff6b35',r:24,x:0,y:0,vx:0,vy:0};
   gN.push(gCenter);
   D.forEach(d=>{
     const dn={id:gid++,type:'domain',title:d.title,icon:d.icon,color:d.color,r:16,did:d.id,subs:d.subs,x:0,y:0,vx:0,vy:0};
@@ -1186,13 +1255,15 @@ function renderGraph(){gSim();gDraw();requestAnimationFrame(renderGraph)}
 function setDataset(name){
   if(curDataset===name)return;
   curDataset=name;
-  D=name==='micro'?D_MICRO:name==='defined'?D_DEFINED:D_INDUSTRY;
+  D=name==='micro'?D_MICRO:name==='defined'?D_DEFINED:name==='leeo'?D_LEEO:D_INDUSTRY;
   document.querySelectorAll('.ds-tab').forEach(b=>b.classList.toggle('active',b.dataset.ds===name));
   const sub=document.getElementById('topSub');
   if(sub)sub.textContent=name==='micro'
     ?'솔루션은 있는데 여전히 손이 가는 아주 작은 불편들 — 실제 리뷰·포럼 근거 기반'
     :name==='defined'
     ?'논문·교과서가 정의한 문제 — ✅ 해결됨은 실제 솔루션, 🔬 미해결은 정의만'
+    :name==='leeo'
+    ?'리이오가 만든 앱이 푸는 실제 문제 지도 — 문제(누가·언제·기존한계) → 🍎 앱'
     :'문제가 솔루션을 만든다 — 세 가지 뷰로 탐색하세요';
   search='';document.getElementById('si').value='';openP.clear();gActive=null;
   cam={x:0,y:0,z:0.4};
